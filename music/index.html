@@ -1,0 +1,904 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Steve Mansour - Music</title>
+    <link href="/sman.css" rel="stylesheet" type="text/css">
+    <link href="/buttons.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/fa/css/all.css">
+
+
+    <script type="text/javascript">
+        var app = {
+            nextID: 1,        // next id new newly created song
+            nextAlbumID: 1,   // next id new newly created album
+            idx: 0,           // index of current song
+            autoPlay: true,   // automatically play next song when current song ends
+            ended: false,     // called when current song ends
+            playing: false,   // indicates the whether the player is playing something or not
+            list: '',         // which list is currently being showed
+            area2Type: 0,     // 0 = album based, 1 = song based
+            albums: [],       // array of all albums, indexed by album name
+        };
+
+        function Album(year,name,imf,imb,producer,artist,comments) {
+            var id = app.nextAlbumID;
+            app.nextAlbumID++;
+            var x = {
+                AID: id,
+                Year: year,
+                Title: name,
+                ImageFront: imf,  // album cover image
+                ImageBack:  imb,  // album back cover
+                Producer: producer,
+                Artist: artist,
+                Comments: comments
+            };
+            app.albums[x.Title] = x;
+            return x;
+        }
+
+        var albums = [
+            Album('2014', 'Unfinished Business', 'Unfinished Business-front-375x375.png', 'Unfinished Business-back.png', 'Steve Mansour', 'Steve Mansour', 'Production Assistance by Matt Kramer<br>All songs written by Matt Kramer, Steve Mansour<br>All instruments and vocals by Steve Mansour.'),
+            Album('work in progress', 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 'Pursuit of Pleasure-back.png', 'Steve Mansour', 'Steve Mansour', 'Production Assistance by Matt Kramer and James Reily<br>All songs written by Matt Kramer, Steve Mansour<br>Players:<br><table><tr><td nowrap align="right" style="color:white;">James Reily</td><td>guitars, bass, percussion</td></tr><tr><td nowrap valign="top" align="right" style="color:white;"">Steve Mansour</td><td valign="top">vocals, guitars, bass, keyboards, drums, percussion</td></tr></table>'),
+            Album('2013', 'Covers', 'Covers.jpg', 'Covers - back 667x667.png', 'Steve Mansour', 'Steve Mansour', ''),
+            Album('2019', 'Cover Me', 'Cover Me front-666x666.png', 'CoverMe-back-667x667.png', 'Steve Mansour', 'Steve Mansour', 'All instruments and vocals by Steve Mansour except where noted'),
+            Album('2015', 'The Steves Volume 1', 'TheSteves-VOL1-front-667x667.png', 'TheSteves-VOL1-back-667x667.png', 'Steve Mansour', 'Steve Mansour', ''),
+            Album('2015', 'The Steves Volume 2', 'TheSteves-VOL2-front-667x667.png', 'TheSteves-VOL2-back-667x667.png', 'Steve Mansour', 'Steve Mansour', ''),
+            Album('work in progress', 'The Steves Cover Motown', 'motown-front-667x667.png', 'motown-back-667x667.png', 'Steve Mansour', 'Steve Mansour', ''),
+        ];
+
+
+        // GetAlbumArt - a function to return the album art url.
+        //
+        // INPUTS
+        //     album = album title
+        //     idx   = art index:  0 = front, 1 = back, ...
+        //----------------------------------------------------------
+        function GetAlbumArt(album,idx) {
+            x = app.albums[album];
+            switch (idx) {
+                case 0: return x.ImageFront;
+                case 1: return x.ImageBack;
+            }
+            return '';
+        }
+
+
+        function Song(type, year, album, name, lyrics, path, part, comments) {
+            var id = app.nextID;
+            app.nextID++;
+            return {
+                SID: id,          // a unique id for each song
+                Type: type,       // 0 = song, 1 = list divider
+                Year: year,       // what year was ths song
+                Album: album,     // the album name
+                Title: name,      // song title
+                Lyrics: lyrics,   // url to song lyrics
+                Path: path,       // URL to the song file
+                Part: part,       // song track(s), for band use, can be blank
+                Comments: comments,
+            };
+        }
+
+        // update the album cover image to front or back as the user chooses.
+        //
+        // INPUTS
+        // idx -  0 = front
+        //        1 = back
+        //----------------------------------------------------------
+        function ShowCover(idx) {
+            var albumCoverArt = document.getElementById('albumCoverArt');
+            albumCoverArt.src = '/music/albums/' + GetAlbumArt(allSongs[app.idx].Album, idx);
+            document.getElementById('coverArtAnchor').href = albumCoverArt.src;
+            switch (idx) {
+                case 0:
+                    var cell = document.getElementById('albumCoverArtBack');
+                    cell.bgColor = "";
+                    cell = document.getElementById('albumCoverArtFront');
+                    cell.bgColor = "#000000";
+                    break;
+                case 1:    
+                    var cell = document.getElementById('albumCoverArtFront');
+                    cell.bgColor = "";
+                    cell = document.getElementById('albumCoverArtBack');
+                    cell.bgColor = "#000000";
+                    break;
+            }
+        }
+
+		var allSongs = [
+            Song(0, 2014, 'Unfinished Business',     'Wall of Love',                       'WallOfLove',         'mp3/Steve Mansour - Wall of Love.mp3', '',''),
+            Song(0, 2014, 'Unfinished Business',     'Broken Glass',                       'BrokenGlass',        'mp3/Steve Mansour - Broken Glass.mp3',               '',''),
+            Song(0, 2014, 'Unfinished Business',     'She Wants Your Money',               'SheWantsYourMoney',  'mp3/Steve Mansour - She Wants Your Money.mp3', '',''),
+            Song(0, 2014, 'Unfinished Business',     'Down On A Number',                   'DownOnANumber',      'mp3/Steve Mansour - Down On A Number.mp3', '',''),
+            Song(0, 2012, 'Unfinished Business',     'Loved By You',                       'LovedByYou',         'mp3/Steve Mansour - Loved By You.mp3', '',''),
+            Song(0, 2007, 'Unfinished Business',     'Silly Metal Band',                   'SillyMetalBand',     'mp3/Steve Mansour - Silly Metal Band.mp3', '',''),
+            Song(0, 2007, 'Unfinished Business',     'I Will Not Say I\'m Sorry',          'IWillNotSayImSorry', 'mp3/Steve Mansour - I Will Not Say I\'m Sorry.mp3', '',''),
+            Song(0, 2007, 'Unfinished Business',     'Can\'t Complain',                    'CantComplain',       'mp3/Steve Mansour - Can\'t Complain.mp3', '',''),
+            Song(0, 2007, 'Unfinished Business',     'Reach Back In Time',                 'reach_back_in_time', 'mp3/Steve Mansour - Reach Back In Time.mp3', '',''),
+            Song(0, 2007, 'Unfinished Business',     'Money\'s Alright',                   'money',              'mp3/Steve Mansour - Money\'s Alright.mp3', '',''),
+            Song(0, 2012, 'Unfinished Business',     'Talk To Her',                        'TalkToHer',          'mp3/Steve Mansour - Talk To Her.mp3', '',''),
+            Song(0, 2013, 'Unfinished Business',     'Twenty Dollar Man',                  '20DollarMan',        'mp3/Steve Mansour - Twenty Dollar Man.mp3', '',''),
+            
+            Song(0, 2012, 'Pursuit Of Pleasure',     'Living Life',                        'LivinLife',          'mp3/Steve Mansour - LivinLife.mp3', '',''),
+            Song(0, 2012, 'Pursuit Of Pleasure',     'Cute Little Lesbians',               'CuteLittleLesbians', 'mp3/Steve Mansour - Cute Little Lesbians.mp3', '',''),
+            Song(0, 2012, 'Pursuit Of Pleasure',     'Sociopath',                          'sociopath',          'mp3/Steve Mansour - Sociopath.mp3', '',''),
+            Song(0, 2012, 'Pursuit Of Pleasure',     'I Will',                             'IWill',              'mp3/Steve Mansour - I Will.mp3', '',''),
+            Song(0, 2012, 'Pursuit Of Pleasure',     'Cold Dark Road',                     'ColdDarkRoad',       'mp3/Steve Mansour - Cold Dark Road.mp3', '',''),
+            Song(0, 2012, 'Pursuit Of Pleasure',     'Remember the Ride',                  'RememberTheRide',    'mp3/Steve Mansour - Remember the Ride.mp3', '',''),
+            
+            Song(0, 2011, 'Covers',                  'Mr Blue Sky',                        '', 'mp3/Steve Mansour - Mr Blue Sky.mp3', '',''),
+            Song(0, 2011, 'Covers',                  'No Reply',                           '', 'mp3/Steve Mansour - No Reply.mp3', '',''),
+            Song(0, 2011, 'Covers',                  'Jenny 867-5309',                     '', 'mp3/Steve Mansour - Jenny.mp3', '',''),
+            Song(0, 2011, 'Covers',                  'Caught In A Dream',                  '', 'mp3/Steve Mansour - Caught In A Dream.mp3', '',''),
+            Song(0, 2011, 'Covers',                  'Toulouse Street',                    '', 'mp3/Steve Mansour - Toulouse Street.mp3', '',''),
+            Song(0, 2011, 'Covers',                  'I\'ve Just Seen A Face',             '', 'mp3/Steve Mansour - I\'ve Just Seen A Face.mp3', '',''),
+            Song(0, 2011, 'Covers',                  'Bluebird',                           '', 'mp3/Steve Mansour - Bluebird.mp3', '',''),
+            Song(0, 2011, 'Covers',                  'I\'m Only Sleeping',                 '', 'mp3/Steve Mansour - I\'m Only Sleeping.mp3', '',''),
+            Song(0, 2011, 'Covers',                  'You Can\'t Do That',                 '', 'mp3/Steve Mansour - You Can\'t Do That.mp3', '',''),
+            Song(0, 2011, 'Covers',                  'Blackbird',                          '', 'mp3/Steve Mansour - Blackbird.mp3', '',''),
+            Song(0, 2011, 'Covers',                  'Call Me Back Again',                 '', 'mp3/Steve Mansour - Call Me Back Again.mp3', '',''),
+            Song(0, 2011, 'Covers',                  'Til Summer Comes Around',            '', 'mp3/Steve Mansour - Til Summer Comes Around.mp3', '',''),
+            Song(0, 2011, 'Covers',                  'Tie Your Mother Down',               '', 'mp3/Steve Mansour - Tie Your Mother Down.mp3', '',''),
+            
+            Song(0, 2018, 'Cover Me',                'Love of the Common Man',             '', 'mp3/Steve Mansour - Love of the Common Man.mp3', '',''),
+            Song(0, 2018, 'Cover Me',                'Superstition',                       '', 'mp3/Steve Mansour - Superstition.mp3', '',''),
+            Song(0, 2018, 'Cover Me',                'Hanging On The Telephone',           '', 'mp3/Steve Mansour - Hanging On The Telephone.mp3', '',''),
+            Song(0, 2018, 'Cover Me',                'Honky Tonk Women',                   '', 'mp3/Steve Mansour - Honky Tonk Women.mp3', '',''),
+            Song(0, 2018, 'Cover Me',                'Tonight',                            '', 'mp3/Steve Mansour - Tonight.mp3', '',''),
+            Song(0, 2018, 'Cover Me',                '39',                                 '', 'mp3/Steve Mansour - 39.mp3', '',''),
+            Song(0, 2018, 'Cover Me',                'Yes It Is',                          '', 'mp3/Steve Mansour - Yes It Is.mp3', '',''),
+            Song(0, 2018, 'Cover Me',                'All The Young Girls Love Alice',     '', 'mp3/Steve Mansour - All The Young Girls Love Alice.mp3', '','James Reily: bass, guitars, harmonica<br>Don Bosco: organ<br>Steve Mansour: vocals, guitars, drums'),
+            Song(0, 2018, 'Cover Me',                'Big Time',                           '', 'mp3/Steve Mansour - Big Time.mp3', '',''),
+            Song(0, 2018, 'Cover Me',                'You\'re No Good',                    '', 'mp3/Steve Mansour - You\'re No Good.mp3', '',''),
+            Song(0, 2018, 'Cover Me',                'A Dream Goes On Forever',            '', 'mp3/Steve Mansour - A Dream Goes On Forever.mp3', '',''),
+            Song(0, 2018, 'Cover Me',                'Alright',                            '', 'mp3/Steve Mansour - Alright.mp3', '',''),
+            
+            Song(0, 2012, 'The Steves Volume 1',     'I\'ll Get You',                      '', 'mp3/Steve Mansour - I\'ll Get You.mp3', '',''),
+            Song(0, 2012, 'The Steves Volume 1',     'Please Please Me',                   '', 'mp3/Steve Mansour - Please Please Me.mp3', '',''),
+            Song(0, 2012, 'The Steves Volume 1',     'Eight Days A Week',                  '', 'mp3/Steve Mansour - Eight Days A Week.mp3', '',''),
+            Song(0, 2012, 'The Steves Volume 1',     'No Reply',                           '', 'mp3/Steve Mansour - No Reply.mp3', '',''),
+            Song(0, 2012, 'The Steves Volume 1',     'Yes It Is',                          '', 'mp3/Steve Mansour - Yes It Is.mp3', '',''),
+            Song(0, 2012, 'The Steves Volume 1',     'You\'ve Got To Hide Your Love Away', '', 'mp3/Steve Mansour - You\'ve Got To Hide Your Love Away.mp3', '',''),
+            Song(0, 2012, 'The Steves Volume 1',     'You\'re Gonna Lose That Girl',       '', 'mp3/Steve Mansour - You\'re Gonna Lose That Girl.mp3', '',''),
+            Song(0, 2012, 'The Steves Volume 1',     'Words Of Love',                      '', 'mp3/Steve Mansour - Words Of Love.mp3', '',''),
+            Song(0, 2012, 'The Steves Volume 1',     'Every Little Thing',                 '', 'mp3/Steve Mansour - Every Little Thing.mp3', '',''),
+            Song(0, 2012, 'The Steves Volume 1',     'I Don\'t Want To Spoil The Party',   '', 'mp3/Steve Mansour - I Don\'t Want To Spoil The Party.mp3', '',''),
+            Song(0, 2011, 'The Steves Volume 1',     'You Can\'t Do That',                 '', 'mp3/Steve Mansour - You Can\'t Do That.mp3', '',''),
+    
+            Song(0, 2012, 'The Steves Volume 2',     'I\'ve Just Seen A Face',             '', 'mp3/Steve Mansour - I\'ve Just Seen A Face.mp3', '',''),
+            Song(0, 2012, 'The Steves Volume 2',     'Fixing A Hole',                      '', 'mp3/Steve Mansour - Fixing A Hole.mp3', '',''),
+            Song(0, 2012, 'The Steves Volume 2',     'Lady Madonna',                       '', 'mp3/Steve Mansour - Lady Madonna.mp3', '',''),
+            Song(0, 2011, 'The Steves Volume 2',     'I\'m Only Sleeping',                 '', 'mp3/Steve Mansour - I\'m Only Sleeping.mp3', '',''),
+            Song(0, 2012, 'The Steves Volume 2',     'If I Needed Someone',                '', 'mp3/Steve Mansour - If I Needed Someone.mp3', '',''),
+            Song(0, 2012, 'The Steves Volume 2',     'Julia',                              '', 'mp3/Steve Mansour - Julia.mp3', '',''),
+            Song(0, 2012, 'The Steves Volume 2',     'I Am The Walrus',                    '', 'mp3/Steve Mansour - I Am The Walrus.mp3', '','Vince Villanueva: Rhodes Piano, chants'),
+            Song(0, 2012, 'The Steves Volume 2',     'Strawberry Fields Forever',          '', 'mp3/Steve Mansour - Strawberry Fields Forever.mp3', '',''),
+            Song(0, 2012, 'The Steves Volume 2',     'Blackbird',                          '', 'mp3/Steve Mansour - Blackbird.mp3', '',''),
+            Song(0, 2012, 'The Steves Volume 2',     'Birthday  ',                         '', 'mp3/Steve Mansour - Birthday.mp3', '',''),
+            Song(0, 2012, 'The Steves Volume 2',     'Helter Skelter',                     '', 'mp3/Steve Mansour - Helter Skelter.mp3', '',''),
+
+            Song(0, 2012, 'The Steves Cover Motown', 'Cool Jerk',                          '', 'mp3/Steve Mansour - Cool Jerk.mp3', '',''),
+            Song(0, 2012, 'The Steves Cover Motown', 'Money (That\'s What I Want)',        '', 'mp3/Steve Mansour - Money (That\'s What I Want).mp3', '',''),
+            Song(0, 2012, 'The Steves Cover Motown', 'You Really Got A Hold On Me',        '', 'mp3/Steve Mansour - You Really Got A Hold On Me.mp3', '','Matt Kramer: vocals<br>Steve Mansour: vocals, instruments'),
+
+            // Song(0, 2012, 'Covers',                  'Bluebird (unplugged)',                   '', 'mp3/Steve Mansour - Bluebird (unplugged).mp3', '','Bonus track.'),
+            // Song(0, 2012, 'Christmas Songs',         'All I Want For Christmas Is You',        '', 'mp3/Steve Mansour - All I Want For Christmas Is You.mp3', '',''),
+            // Song(0, 2012, 'Christmas Songs',         'Christmas (Baby Please Come Home)',      '', 'mp3/Steve Mansour - Christmas (Baby Please Come Home).mp3', '',''),
+            // Song(0, 2012, 'Christmas Songs',         'Have Yourself A Merry Little Christmas', '', 'mp3/Steve Mansour - Have Yourself A Merry Little Christmas.mp3', '',''),
+            // Song(0, 2012, 'Christmas Songs',         'I Saw Mommy Kissing Santa Claus',        '', 'mp3/Steve Mansour - I Saw Mommy Kissing Santa Claus.mp3', '',''),
+            // Song(0, 2012, 'Christmas Songs',         'Last Christmas',                         '', 'mp3/Steve Mansour - Last Christmas.mp3', '',''),
+            // Song(0, 2012, 'Christmas Songs',         'Merry Christmas',                        '', 'mp3/Steve Mansour - Merry Christmas.mp3', '',''),
+            // Song(0, 2012, 'Christmas Songs',         'Rocking Around the Christmas Tree',      '', 'mp3/Steve Mansour - Rocking Around the Christmas Tree.mp3', '',''),
+            // Song(0, 2012, 'Christmas Songs',         'Run Run Rudolph',                        '', 'mp3/Steve Mansour - Run Run Rudolph.mp3', '',''),
+            // Song(0, 2012, 'UnfinishedBusiness',      'Baby Blue',                              '', 'mp3/Steve Mansour - Baby Blue.mp3', '',''),
+            // Song(0, 2012, 'UnfinishedBusiness',      'Happy Birthday Sharon',                  '', 'mp3/Steve Mansour - Happy Birthday Sharon.mp3', '',''),
+            // Song(0, 2012, 'UnfinishedBusiness',      'There She Goes',                         '', 'mp3/Steve Mansour - There She Goes.mp3', '',''),
+		];
+
+		function setAutoPlay(b) {
+			app.autoPlay = b;
+			var s = '<span style="color: #84c731"><i class="fas fa-toggle-o' + (b ? 'n' : 'ff') + '"></i></span>';
+			var autoPlay = document.getElementById('autoPlay');
+			autoPlay.innerHTML = s;
+		}
+
+		function toggleAutoPlay() {
+			setAutoPlay(!app.autoPlay);
+		}
+
+		function initJukebox() {
+			var audio = document.getElementById('jukebox');
+           
+            // audioprocess
+            //      The input buffer of a ScriptProcessorNode is ready to be processed.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('audioprocess', function() {
+                // console.log('audioprocess');
+            } );
+            
+            // canplay
+            //      The browser can play the media, but estimates that not enough data
+            //      has been loaded to play the media up to its end without having to
+            //      stop for further buffering of content.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('canplay', function() {
+                // console.log('canplay');
+            } );
+            
+            // canplaythrough
+            //      The browser estimates it can play the media up to its end without
+            //      stopping for content buffering.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('canplaythrough', function() {
+                // console.log('canplaythrough');
+            } );
+            
+            // complete
+            //      The rendering of an OfflineAudioContext is terminated.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('complete', function() {
+                // console.log('complete');
+            } );
+            
+            // durationchange
+            //      The duration attribute has been updated.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('durationchange', function() {
+                // console.log('durationchange');
+            } );
+            
+            // emptied
+            //      The media has become empty; for example, this event is sent if the
+            //      media has already been loaded (or partially loaded), and the load()
+            //      method is called to reload it.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('emptied', function() {
+                // console.log('emptied');
+            } );
+            
+            // ended
+            //      Playback has stopped because the end of the media was reached.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('ended', function() {
+                // console.log('ended.  currentTime = ' + this.currentTime);
+                if (this.currentTime == 0) {
+                    return;
+                }
+                app.ended = true;
+                if (app.autoPlay) {
+                    nextSong();
+                }
+                app.ended = false;
+            } );
+            
+            // loadeddata
+            //      The first frame of the media has finished loading.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('loadeddata', function() {
+                // console.log('loadeddata');
+            } );
+            
+            // loadedmetadata
+            //      The metadata has been loaded.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('loadedmetadata', function() {
+                // console.log('loadedmetadata');
+            } );
+            
+            // pause
+            //      Playback has been paused.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('pause', function() {
+                // console.log('pause');
+                app.playing = false;
+                setSongIndicator();
+            } );
+            
+            // play
+            //      Playback has begun.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('play', function() {
+                // console.log('play');
+                app.playing = true;
+                setSongIndicator();
+            } );
+            
+            // playing
+            //      Playback is ready to start after having been paused or delayed due to
+            //      lack of data.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('playing', function() {
+                // console.log('playing');
+                SetStalled(0);
+            } );
+            
+            // ratechange
+            //      The playback rate has changed.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('ratechange', function() {
+                // console.log('ratechange');
+            } );
+            
+            // seeked
+            //      A seek operation completed.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('seeked', function() {
+                // console.log('seeked');
+            } );
+            
+            // seeking
+            //      A seek operation began.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('seeking', function() {
+                // console.log('seeking');
+            } );
+            
+            // stalled
+            //      The user agent is trying to fetch media data, but data is unexpectedly
+            //      not forthcoming.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('stalled', function() {
+                // console.log('stalled');
+                SetStalled(1);
+            } );
+            
+            // suspend
+            //      Media data loading has been suspended.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('suspend', function() {
+                // console.log('suspend');
+            } );
+            
+            // timeupdate
+            //      The time indicated by the currentTime attribute has been updated.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('timeupdate', function() {
+                // console.log('timeupdate');
+            } );
+            
+            // volumechange
+            //      The volume has changed.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('volumechange', function() {
+                // console.log('volumechange');
+            } );
+            
+            // waiting
+            //      Playback has stopped because of a temporary lack of data
+            //----------------------------------------------------------------------------
+            audio.addEventListener('waiting', function() {
+                // console.log('waiting');
+                SetStalled(1);
+            } );
+
+			setAutoPlay(app.autoPlay);
+		}
+
+        // SetStalled - show or remove the stalled data indicator
+        // 
+        // INPUTS
+        //    x   0 = remove the indicator, 1 = show the indicator
+        //------------------------------------------------------------------
+        function SetStalled(x) {
+            var stalled = document.getElementById('jukeboxStalled');
+            switch (x) {
+                case 0: stalled.innerHTML = ''; break;
+                case 1: stalled.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; break;
+            }
+        }
+
+        //------------------------------------------------------------------
+        // GetArea2IndexString - returns the appropriate list name.
+        //             That is, it returns the current album title
+        //             if app.area2Type == 0, or it returns the song Title
+        //             if app.area2Type == 1.
+        //
+        // INPUTS
+        //
+        // RETURNS  current list name
+        //------------------------------------------------------------------
+        window.GetArea2IndexString = function() {
+            switch (app.area2Type) {
+                case 0: return allSongs[app.idx].Album;
+                case 1: return allSongs[app.idx].Title;
+            }
+            return '';
+        }
+
+		//------------------------------------------------------------------
+		// ShowSongs - function to format the playlist into HTML.
+		//             The "nowPlaying" indicator cell has a unique id
+		//             that is the album name + song index.
+		//
+		// INPUTS
+		//
+		// RETURNS
+		//------------------------------------------------------------------
+		window.ShowSongs = function() {
+			var s = "";
+			var sl = '<table align="left" style="border: 0px solid #888888;" >';
+            var alength = allSongs.length;
+			for (i = 0; i < alength; i++) {
+                if (app.area2Type == 0 && allSongs[i].Album == app.list) {
+    				s = '<tr><td width="20"><span id="' + allSongs[i].Album + i + '"></span></td>'
+    				s += '<td><a href="javascript:void(0);" onclick="playSong(' + i + ')"><span class="jukeList">' + allSongs[i].Title;
+                    if (allSongs[i].Comments != '') {
+                        s += '<span style="color: #84c731;"> <sup><i class="far fa-comment"></i></sup></span>';
+                    }
+                    s += '</span></a></td></tr>';
+    				sl += s;
+                } else if (app.area2Type == 1 && allSongs[i].Title == app.list) {
+                    s = '<tr><td width="20"><span id="' + allSongs[i].Title + GetAlbumArt(allSongs[i].Album,0) + '"></span></td>'
+    				s += '<td><a href="javascript:void(0);" onclick="playSong(' + i + ')"><span class="jukeList">' + allSongs[i].Title;
+                    if (allSongs[i].Part != '') {
+                        s += ' - ' + allSongs[i].Part;
+                    }
+                    s += '</span></a></td></tr>';
+    				sl += s;
+                }
+			}
+            sl += '</table>';
+            var area1List = document.getElementById("area1List");
+            area1List.innerHTML = sl;
+		}
+
+        window.SetSongListIndicator = function(i) {
+            switch (app.area2Type) {
+                case 0:
+                    var x = GetArea2IndexString();
+                    var cell = document.getElementById(x);
+                    cell.bgColor = "";
+                    app.idx = i;
+                    x = GetArea2IndexString();
+                    app.list = x;
+                    cell = document.getElementById(x);
+                    cell.bgColor = "#000000";
+                break;
+                case 1:    
+                    //----------------------------------------------------------------
+                    // Update the Area2 indicator
+                    // First, remove the indicator from the current album in area2...
+                    // Then update the new album indicator
+                    //----------------------------------------------------------------
+                    var cell = document.getElementById(x);
+                    if (x != null) {
+                        cell.innerHTML = '';
+                    }
+                    app.idx = i;
+                    app.list = GetArea2IndexString();
+                    x = 'area2-' + app.list;
+                    cell = document.getElementById(x);
+                    if (x != null) {
+                        cell.innerHTML = '<span style="color: #84c731"><i class="fas fa-angle-double-right fa-2x"></i></span>';
+                    }
+                    break;
+            }
+        }
+
+        window.UpdateSongList = function(i) {
+            var audio = document.getElementById('jukebox');
+            if (!audio.paused) {
+                audio.pause();
+                app.playing = false;
+            }
+            SetSongListIndicator(i);
+            ShowSongs();
+            SetToSong(i);
+            setSongIndicator(i);
+            ShowCover(0);
+        }
+
+        //------------------------------------------------------------------
+		// ShowLists - function to generate the collections list. Can
+		//             be organized by album or by song. The song organization
+		//             may only be useful for the band or other special purpose
+        //             use case.
+		//
+        //
+        //  Table generated in area2 has the following
+        //         +----- id = "area2-" + album name if app.area2Type == 0 or
+        //         |           song title if app.area2Type == 1
+        //         |
+        //         |          Album name if if app.area2Type == 0 or
+        //         |          |    song title + album name if 1
+        //         V          V
+        //      |          |                 |
+        //      |          |                 |
+        //
+        // INPUTS    - x the organizer type.  0 = organize by album, 1 = by song
+		//
+		// RETURNS
+		//------------------------------------------------------------------
+        window.ShowLists = function(x) {
+			var s = "";
+            var target;
+            var contents;
+            var lists = [];
+			var sl = '<table align="left" style="border: 0px solid #888888;" cellspacing="4" cellpadding="4">';
+            var skip;
+            var col = 0;
+            var maxcol = 5;
+            var width=125;
+
+			for (i = 0; i < allSongs.length; i++) {
+                skip = true;
+                switch (x) {
+                    case 0:
+                        // add the album if it does not yet exist...
+                        target = allSongs[i].Album;
+                        contents = "album tracks";
+                        if ( !( target in lists) ) {
+                            lists[target] = 1; // mark that we've listed this album
+                            var href = '<a href="javascript:void(0)" onclick="UpdateSongList(' + i + ')">';
+                            s = '';
+                            if (col == 0) {
+                                // start a new row
+                                s += '<tr>';
+                            }
+                            // s += '<td width="15" id="area2-' + target + '"></td><td align="center" id="' + target + '">' + href + '<img id="albumCoverArt" src="albums/' + allSongs[i].Image + '" width="' + width + '"><br>' + target + '</a></td>';
+                            s += '<td align="center" id="' + target + '">' + href + '<img id="albumCoverArt" src="albums/' + GetAlbumArt(allSongs[i].Album,0) + '" width="' + width + '"><br>' + target + '</a></td>';
+                            skip = false;
+                            ++col;
+                            if (col == maxcol) {
+                                col = 0;
+                                s += '</tr>';
+                            }
+                        }
+                        break;
+                    case 1:
+                        target = allSongs[i].Title;
+                        contents = "isolated tracks";
+                        if (! (target in lists) ) {
+                            lists[target] = 1; // mark that we've listed it
+                            s = '<tr><td width="15" id="area2-' + target + '"></td><td><img id="albumCoverArt" src="music/albums/' + GetAlbumArt(allSongs[i].Album,0) + '" width="30"></td><td>';
+                            s += '<span class="playerArea2Song"><a href="javascript:void(0)" onclick="UpdateSongList(' + i + ')">' + target + '</a></span></td><td><span class="playerArea2SongAlbum">' + allSongs[i].Album + '</span></td></tr>';
+                            skip = false;
+                        }
+                        break;
+                    default:
+                        console.log('ERROR: invalid list organizer: ' + x);
+                        break;
+                }
+                if (!skip) {
+    				sl += s;
+                    if (app.list === '') {
+                        app.list = target;
+                    }
+                }
+			}
+            if (col != 0) {
+                s += '</tr>';
+            }
+			sl += '</table>';
+            var area2List = document.getElementById("area2List");
+            area2List.innerHTML = sl;
+			initJukebox();
+		}
+
+        function getSongIndicatorId(i) {
+            var id = '';
+            switch (app.area2Type) {
+                case 0: // album
+                    id = allSongs[i].Album + i;
+                    break;
+                case 1: // song + part
+                    id = allSongs[i].Title + allSongs[i].Part;
+                    break;
+                default:
+                    console.log("Error: incorrect app.area2Type in setSongIndicator: " + app.area2Type);
+                    break;
+            }
+            return id;
+        }
+
+		function nowPlayingIndicator(i, s) {
+            var x = getSongIndicatorId(i);
+			var cell = document.getElementById(x);
+			if (cell != null) {
+				cell.innerHTML = s;
+			}
+		}
+
+		function getSongIndicatorHTML() {
+			var s = app.playing ? 'fa-volume-up' : 'fa-play';
+			var h = '<a href="javascript:void(0);" onclick="togglePlaySong()"><span style="color: #84c731"><i class="fas ' + s + '"></i></span></a>';
+			return h;
+		}
+
+		function setSongIndicator() {
+			var id = getSongIndicatorId(app.idx);  // html element id in area 1 of currently playing song
+			var x = document.getElementById(id);
+			var h = getSongIndicatorHTML();
+			x.innerHTML = h;
+		}
+
+		function playCore(i) {
+			nowPlayingIndicator(app.idx, "")
+			var audio = document.getElementById('jukebox');
+			var source = document.getElementById('jukeboxSource');
+			var name = document.getElementById('nowPlaying');
+			var comment = document.getElementById('songComments');
+			var year = document.getElementById('albumYear');
+			var albumCoverArt = document.getElementById('albumCoverArt');
+			var album = document.getElementById('album');
+			var track = document.getElementById('track');
+			var songpart = document.getElementById('songpart');
+			app.idx = i;
+			name.innerHTML = allSongs[i].Title;
+			comment.innerHTML = allSongs[i].Comments;
+			year.innerHTML = '' + app.albums[allSongs[i].Album].Year;
+			album.innerHTML = allSongs[i].Album;
+            var s='';
+            s='';
+            if (allSongs[i].Lyrics.length > 0) {
+                s = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/songwriter/lyrics/'+ allSongs[i].Lyrics + '.html" target="_blank"><span class="playerLyrics">&nbsp;LYRICS&nbsp;</span></a>';
+            }
+			track.innerHTML = allSongs[i].Title + s;
+
+            if (songpart != null) {  // only found on band page
+                songpart.innerHTML = allSongs[i].Part;
+            }
+            document.getElementById('albumComments').innerHTML = app.albums[allSongs[i].Album].Comments;
+			albumCoverArt.src = '/music/albums/' + GetAlbumArt(allSongs[i].Album,0);
+			source.src = allSongs[i].Path; // the url or path to the song file
+			var h = getSongIndicatorHTML();
+			nowPlayingIndicator(i, h);
+			return audio;
+		}
+
+		function SetToSong(i) {
+			var audio = playCore(i);
+			audio.load();
+		}
+
+		//------------------------------------------------------------------
+		// playSong - set the source of the player to a song in the list
+		//            and play it
+		//
+		// INPUTS
+		//		i = index of song in allSongs[]
+		//
+		// RETURNS
+		//------------------------------------------------------------------
+		function playSong(i) {
+			var audio = playCore(i);
+			var playing = !audio.paused;
+			audio.load(); // load no matter what
+			if (playing || app.ended) { // play only if we were already playing
+				audio.play();
+			}
+		}
+
+		//------------------------------------------------------------------
+		// togglePlaySong - if the audio element is playing then pause it,
+		//                  if it's not playing then start it.
+		//------------------------------------------------------------------
+		function togglePlaySong(i) {
+			var audio = document.getElementById('jukebox');
+			if (app.playing) {
+				audio.pause();
+			} else {
+				audio.play();
+			}
+		}
+
+        function songInList(i) {
+            switch (app.area2Type) {
+                case 0: return allSongs[i].Album == app.list;  // in the album?
+                case 1: return allSongs[i].Title == app.list;  // in the song list?
+            }
+            return false;
+        }
+
+		function prevSong() {
+			var i = app.idx;
+            var found = false;
+            do {
+    			i--;
+    			if (i < 0) {
+    				i = allSongs.length - 1;
+    			}
+                found = songInList(i);
+            } while (!found)
+			playSong(i);
+		}
+
+		function nextSong() {
+            var found = false;
+			var i = app.idx;
+            do {
+                i++;
+                if (i >= allSongs.length) {
+                    i = 0;
+                }
+                found = songInList(i);
+            } while (!found);
+			playSong(i);
+		}
+
+		function beginningOfSong() {
+			var audio = document.getElementById('jukebox');
+			audio.currentTime = 0;
+		}
+
+        function Init() {
+            switch (app.area2Type) {
+                case 0: // album based
+                case 1: // song based
+                    app.list = allSongs[0].Title;
+            }
+        }
+	</script>
+</head>
+
+<body>
+    <script>
+        Init();
+    </script>
+    <div align="center" class="titletext" style="margin-top: 10;margin-bottom: 10;">Steve Mansour</div>
+    <table align="center">
+        <tr>
+            <td class="button4"><a href="/index.html">HOME</a></td>
+            <td width="25"></td>
+            <td class="button4"><a href="/music/index.html">MUSICIAN</a></td>
+            <td width="25"></td>
+            <td class="button4"><a href="/songwriter/index.html">SONG WRITER</a></td>
+            <td width="25"></td>
+            <td class="button4"><a href="/producer/index.html">PRODUCER</a></td>
+        </tr>
+    </table>
+
+    <!-- PUNK inset/topmenu.html -->
+    <table align="center">
+        <tr>
+            <td class="button4"><a href="/music/index.html">ALBUMS</a></td>
+            <td width="25"></td>
+            <td class="button4"><a href="/ChristmasSongs/index.html">CHRISTMAS SONGS</a></td>
+            <td width="25"></td>
+            <td class="button4"><a href="/music/video.html">VIDEOS</a></td>
+            <td width="25"></td>
+            <td class="button4"><a href="/music/collab/index.html">COLLABORATIONS</a></td>
+        </tr>
+    </table>
+    <!-- ENDPUNK -->
+    <br>
+    <!-------------------------------------------------------
+        MP3 Player
+    --------------------------------------------------------- -->
+    <table align="center" border="1" width="900"  bgcolor="#333333" style="border: 1px solid #888888;">
+        <tr>
+            <td align="right" valign="center" nowrap>
+                <!--
+                    PREVIOUS
+                -->
+                <button onclick="prevSong()" class="playerButton"><i class="fas fa-backward"></i></button> &nbsp;&nbsp;
+                <button onclick="beginningOfSong()" class="playerButton"><i class="fas fa-fast-backward"></i></button> &nbsp;&nbsp;
+            </td>
+            <td align="center" width="470">
+                <!--
+                    TRANSPORT
+                -->
+                <table cellpadding="2" align="center" border="0" style="border-collapse: collapse;">
+                    <tr>
+                        <!-- 
+                            SONG TITLE
+                        -->
+                        <td align="center">
+                            <span id="nowPlaying" class="jukeTitle"></span>
+                            <span id="jukeboxStalled" style="color:red;"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <audio class="my_audio" controls preload="none" id="jukebox" style="height: 20px;">
+                                <source id="jukeboxSource" src="">
+                                </source>
+                                Your browser does not support the audio format.
+                            </audio>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td align="left" valign="center">
+                <!-- 
+                    NEXT
+                -->
+                &nbsp;&nbsp;<button onclick="nextSong()" class="playerButton"><i class="fas fa-forward"></i></button> &nbsp;&nbsp;
+            </td>
+            <td align="center" nowrap>
+                <span style="color: #888888;font-size: 10pt;">AUTOPLAY NEXT<br></span>
+                <a href="javascript:void(0);" onclick="toggleAutoPlay();" style="color: #888888;font-size: 10pt;">
+                    OFF <span id="autoPlay"></span> ON
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" width="100%">
+                <table width="100%" style="border-collapse: collapse;">
+                    <tr>
+                        <td align="center" width="360" style="border: 1px solid #888888">
+                            <!--
+                                ALBUM COVER
+                            -->
+                            <a target="_blank" id="coverArtAnchor" href="../music/albums/Unfinished Business-front-375x375.png"><img id="albumCoverArt" src="../music/albums/Unfinished Business-front-375x375.png" width="350" style="border: 6px solid #000000;"></a>
+                            <table style="border: 0px solid #888888;border-collapse: collapse;" width="100%">
+                                <tr><td colspan="2" height="10" bgColor="#000000"></td></tr>
+                                <tr>
+                                    <td align="center" id="albumCoverArtFront" style="padding: 6px;">
+                                        <span style="font-size:7pt;"><a href="javascript:void(0)" onclick="ShowCover(0)">FRONT COVER</a></span>
+                                    </td>
+                                    <td align="center" id="albumCoverArtBack" style="padding: 6px;">
+                                        <span style="font-size:7pt;"><a href="javascript:void(0)" onclick="ShowCover(1)">BACK COVER</a></span>
+                                    </td>
+                                </tr>
+                                <tr><td colspan="2" height="10"></td></tr>
+                            </table>
+                        </td>
+                        <td  style="border: 1px solid #888888" width="230">
+                            <!--
+                                TRACK LIST
+                            -->
+                            <span id="area1List">
+                            </span>
+                        </td>
+                        <td colspan="4" height="15" valign="top" style="border: 1px solid #888888">
+                            <!--
+                                SONG DETAILS
+                            -->
+                            <table style="border: 0px solid #888888;" >
+                                <tr>
+                                    <td><span class="playerInfoLabel">ALBUM:</span></td>
+                                    <td><span id='album' class="playerAlbumTitle"></span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="playerInfoLabel">TRACK:</span></td>
+                                    <td><span id='track' class="playerSongTitle"></span></td>
+                                </tr>
+            <!--                    <tr>
+                                    <td><span class="playerInfoLabel">PART(S):</span></td>
+                                    <td><span id='songpart' class="playerSongTitle"></span></td>
+                                    </tr>
+             -->                    <tr>
+                                    <td><span class="playerInfoLabel">YEAR:</span></td>
+                                    <td><span id="albumYear" class="playerSongYear"></span></td>
+                                </tr>
+                            </table>
+                            <p>
+                                <div id="albumComments" style="margin-left: 10px;font-size: 10pt;color: #bbb;"></div>
+                                <br>
+                                <div id="songComments" style="margin-left: 11px;font-size: 10pt;"></div>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <!--
+                ALBUM LIST
+            -->
+            <td colspan="4">
+                <span id="area2List"></span>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        app.list = "Unfinished Business";
+        ShowLists(app.area2Type);
+        ShowSongs();
+        initJukebox();
+		SetToSong(0);
+        SetSongListIndicator(0);
+        ShowCover(0);
+	</script>
+
+<!--
+    <p>The Amazing Slow Downer: <a href="asd.zip">asd</a><br>
+    The Amazing Unlocker: <a href="ASDUnlocker.dmg">unlocker</a></p>
+-->
+</body>
+</html>

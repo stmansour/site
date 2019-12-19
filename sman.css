@@ -1,0 +1,213 @@
+@charset "UTF-8";
+/* CSS Document */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:900,Thin');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans|Oswald|Gruppo');
+@import url('https://fonts.googleapis.com/css?family=Orbitron:900');
+@import url('https://fonts.googleapis.com/css?family=Patua+One|Staatliches|Cairo|Archivo+Black|Acme');
+body {
+    height: 100%;
+    background: #000000;
+    color: white;
+    font-family: "PT Sans","Oswald","Roboto", "Open Sans", sans-serif;
+}
+
+.container {
+    bottom: 0;
+    display: grid;
+    grid-gap: 3px;
+    grid-template-areas: "h h h h h h h h h h h h" "c c c c c c c c c c c c" "f f f f f f f f f f f f";
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 125px auto 50px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.firstName {
+    color: #ffffff;
+    font-size: 64pt;
+    font-weight: 900;
+    font-family: 'Orbitron';
+}
+
+.lastName {
+    color: #aaaaaa;
+    font-size: 64pt;
+    font-weight: 900;
+    font-family: 'Orbitron';
+}
+
+.titletext {
+	font-family: "Orbitron";
+    font-weight: 900;
+	font-size: 36px;
+}
+
+.header {
+    background: #181818;
+    grid-area: h;
+    text-align: center;
+    vertical-align: middle;
+}
+
+a:link {
+    color: white;
+    text-decoration: none;
+}
+
+/* 	background-color: #666666; */
+
+a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.menu {
+    background: #202020;
+    grid-area: m;
+}
+
+.content {
+    background: #282828;
+    grid-area: c;
+}
+
+.footer {
+    background: #202020;
+    grid-area: f;
+}
+
+.roles {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+}
+
+.role {
+    border: 1px solid #181818;
+}
+
+.roleTitle {
+    background: #404040;
+    text-align: center;
+    /* margin: 25px 25px 25px 25px; */
+}
+
+.rolePara {
+    text-align: center;
+}
+
+.tableblack {
+	background-color: black;
+	color: white;
+	font-size: 10pt;
+}
+
+.lyriclabel {
+    color: #5bd4ed;
+    font-weight: bold;
+}
+.albumSong {
+    font-size: 10pt;
+}
+.albumTitle {
+	font-size: 18px;
+	font-weight:bold;
+}
+.lyrics {
+	color: #666;
+}
+.imgFloatRight {
+    float: right;
+}
+
+.xmasYear {
+    font-size: 16pt;
+    font-family: 'Patua One';
+    color: #50DC49;
+}
+.xmasTitle {
+    font-size: 16pt;
+    font-family: 'Staatliches';
+}
+.jukeTitle {
+    font-size: 14pt;
+    font-family: 'Archivo Black';
+    color: #58D4ED;
+}
+.jukeList {
+    font-size: 11pt;
+    font-family: 'Cairo';
+}
+.playerInfoLabel {
+    font-size: 8pt;
+    font-family: 'Open Sans';
+    color: #58D4ED;
+}
+.playerAlbumTitle {
+    font-size: 13pt;
+    font-family: 'Staatliches';
+    color: #FFFFFF;
+}
+.playerSongTitle {
+    font-size: 11pt;
+    font-family: 'Acme';
+    color: #FFFFFF;
+}
+.playerSongYear {
+    font-size: 10pt;
+    font-family: 'Patua One';
+    color: #FFFFFF;
+}
+.isoSongTitle {
+    color: #58D4ED;
+    font-weight: 900;
+    font-family: 'Orbitron';
+}
+.videoSongTitle {
+    font-size: 12pt;
+    font-family: 'Acme';
+    color: #FFFFFF;
+}
+.playerArea2Song {
+    font-size: 13pt;
+    font-family: 'Acme';
+    color: #FFFFFF;
+}
+.playerArea2SongAlbum {
+    font-size: 12pt;
+    font-family: 'Staatliches';
+    color: #CC3333;
+}
+.playerButton {
+    background-color: #777777;
+    border: none;
+    color: #dddddd;
+    padding: 7px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 2px 2px #000000;
+}
+.playerButton:hover {
+    background-color: #aaaaaa;
+}
+.playerButton:active {
+  background-color: #444444;
+  box-shadow: 2px 2px #aaaaaa;
+  transform: translateY(4px);
+}
+.playerLyrics {
+  border: 3px solid green;
+  background: #bbffbb;
+  color: #005500;
+  font-family: 'Cairo', sans-serif;
+  font-size: 9pt;
+}

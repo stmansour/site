@@ -1,0 +1,53 @@
+@charset "UTF-8";
+/* CSS Document */
+@import url('https://fonts.googleapis.com/css?family=Pangolin&display=swap');
+body {
+    height: 100%;
+    background: white;
+    color: black;
+    font-family: serif;
+    font-size: 12pt;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-right: 80px;
+    margin-left:  80px;
+}
+
+div {
+    vertical-align: top;
+}
+
+.title {
+    font-size: 24pt;
+    font-weight: bold;
+    text-align: center;
+}
+
+.comment {
+    font-family: "Pangolin",cursive;
+    color: blue;
+    font-size: 11pt;
+}
+
+.author {
+    font-size: 11pt;
+    text-align: center;
+}
+
+.verse, .push, .chorus, .section, .outro, .intro, .bridge {
+
+}
+
+.bg {
+    margin-bottom: -11pt;
+    margin-left: 25px;
+    font-style: italic;
+    color: blue;
+}
+
+.part {
+    font-size: 11;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: red;
+}

@@ -1,0 +1,466 @@
+<!doctype html>
+<html>
+
+<head>
+	<script src="/js/jquery.min.js"></script>
+	<link rel="stylesheet" href="/fa/css/all.css">
+	<link rel="stylesheet" href="/sman.css" type="text/css">
+	<link href="/ChristmasSongs/smx.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="/buttons.css" type="text/css">
+	<meta charset="UTF-8">
+	<title>Steve Mansour - Christmas Songs</title>
+
+	<style type="text/css">
+		.vidTitle {
+		    font-size: 48pt;
+		    font-family: 'Staatliches';
+		    color: white;
+		}
+		.vidSong {
+		    font-size: 24pt;
+		    font-family: 'Acme';
+		    color: white;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<script>
+		var app = {
+			idx: 0, // index of current song
+			autoPlay: true, // automatically play next song when current song ends
+			ended: false, // called when current song ends
+			playing: false, // indicates the whether the player is playing something or not
+		};
+
+		function Song(id, year, album, img, name, path, comments) {
+			return {
+				SID: id,
+				Year: year,
+				Album: album,
+				Image: img,
+				Title: name,
+				Path: path,
+				Comments: comments
+			};
+		}
+
+		var allSongs = [
+			// Song('Unfinished Business', 'Broken Glass', '/music/mp3/Steve%20Mansour%20-%20Broken%20Glass.mp3'),
+			// Song('Unfinished Business', 'Down On A Number', '/music/mp3/Steve%20Mansour%20-%20Down%20On%20A%20Number.mp3'),
+			// Song('Pursuit Of Pleasure', 'Cute Little Lesbians', '/music/mp3/Steve%20Mansour%20-%20Cute%20Little%20Lesbians.mp3'),
+			// Song('The Steves', 'Eight Days A Week', '/music/mp3/Steve%20Mansour%20-%20Eight%20Days%20A%20Week.mp3'),
+			// Song('The Steves', 'Fixing A Hole', '/music/mp3/Steve%20Mansour%20-%20Fixing%20A%20Hole.mp3'),
+
+			Song(1, 2013, 'Christmas Songs', 'ChristmasSongs.png', 'Rocking Around the Christmas Tree', '/music/mp3/Steve Mansour - Rocking Around the Christmas Tree.mp3',
+				'This year I started what I hope to make a new annual tradition: a Christmas song. The inaugural tune features the incomparable James Reily. With apologies' +
+				' to Brenda Lee, here is our version of Rocking Around the Christmas Tree. Happy Holidays everybody!' +
+				'<br><br><span class="playerInfoLabel">Players:</span><table cellpadding="2" cellspacing="2">' +
+				'<tr><td>James Reily</td><td width=10></td><td>guitar, harmonica, and "Rock" yells</td></tr>' +
+				'<tr><td>Steve Mansour</td><td></td><td>guitars, bass, drums, vocals, glockenspiel</td></tr>' +
+				'</table>'),
+			Song(2, 2014, 'Christmas Songs', 'ChristmasSongs.png', 'Run Run Rudolph', '/music/mp3/Steve Mansour - Run Run Rudolph.mp3',
+				'All of my music buddies were busy gigging this year, which is good for them, but it means I had to pull this this one together by myself. It\'s an old Chuck Berry classic, Run Run Rudolph, ' +
+				'which I have hacked to shreds and thrown in a few surprises. All voices and instruments by you know who. Hope you like it.'),
+			Song(3, 2015, 'Christmas Songs', 'ChristmasSongs.png', 'Last Christmas', '/music/mp3/Steve Mansour - Last Christmas.mp3',
+				'Well, this year it\'s another solo effort. It was still a lot of fun to pull together. And, unlike last year, I managed to finish it before Christmas! On this little number I made a' +
+				' bunch of noise on synthesizers (yup, no guitars in this one), V-Drums (yikes! well, at least I used real drumsticks), and layered in some errant caterwauling. It sort of resembles an old \'80s ' +
+				'tune called Last Christmas. I hope you like it! Happy holidays everybody!'),
+			Song(4, 2015, 'Christmas Songs', 'ChristmasSongs.png', 'All I Want For Christmas Is You', '/music/mp3/Steve%20Mansour%20-%20All%20I%20Want%20For%20Christmas%20Is%20You.mp3',
+				'How quickly this year went by! Here\'s my rendition of All I Want For Christmas Is You, with a little surprise classic thrown in the middle. And I\'m pleased to welcome back again in this year\'s song, the incomparable James Reily. Hope you enjoy it. Happy Holidays everyone!' +
+				'<br><br><span class="playerInfoLabel">Players:</span><table cellpadding="2" cellspacing="2">' +
+				'<tr><td>James Reily</td><td width="10"></td><td>bass, guitar, percussion</td></tr>' +
+				'<tr><td>Steve Mansour</td><td></td><td>drums, keyboards, guitars, bass, vocals' +
+				'</table>'),
+			Song(5, 2016, 'Christmas Songs', 'ChristmasSongs.png', 'Merry Christmas', '/music/mp3/Steve%20Mansour%20-%20Merry%20Christmas.mp3',
+				'Here is installment #5, my 5th annual Christmas song. This year I did a video too! Hope you like it. Please share it if you do. Happy Holidays everyone!'),
+			Song(6, 2017, 'Christmas Songs', 'ChristmasSongs.png', 'Have Yourself A Merry Little Christmas', '/music/mp3/Steve%20Mansour%20-%20Have%20Yourself%20A%20Merry%20Little%20Christmas.mp3',
+				'Here is my 6th annual Christmas song. Hope you like it!'),
+			Song(7, 2018, 'Christmas Songs', 'ChristmasSongs.png', 'I Saw Mommy Kissing Santa Claus', '/music/mp3/Steve%20Mansour%20-%20I%20Saw%20Mommy%20Kissing%20Santa%20Claus.mp3',
+				'My 7th annual Christmas song is "I Saw Mommy Kissing Santa Claus". There\'s a vocal intro that segues into a rocking version of this Christmas standard. This year there is a special treat,' +
+				' 2 guest artists were double-tracked to create a brass section: the incomparable chromatic harmonica of James Reily and the fire-breathing saxophone of Bill Murphy. Hope you enjoy it! Please share with your friends!' +
+				'<br><br><span class="playerInfoLabel">Players:</span><table cellpadding="2" cellspacing="2">' +
+				'<tr><td>James Reily</td><td width="10"></td><td>harmonica</td></tr>' +
+				'<tr><td>Bill Murphy</td><td width="10"></td><td>tenor saxophone</td></tr>' +
+				'<tr><td>Steve Mansour</td><td></td><td>drums, keyboards, guitars, bass, vocals' +
+				'</table>'),
+			Song(8, 2019, 'Christmas Songs', 'ChristmasSongs.png', 'Christmas (Baby Please Come Home)', '/music/mp3/Steve%20Mansour%20-%20Christmas%20(Baby%20Please%20Come%20Home).mp3',
+				'This is my 8th Christmas song and the fourth with a video. It includes four very talented contributors.  Back again this year is the fire-breathing Bill Murphy on sax, he wails and never disappoints! ' +
+				'We also have a power-trio of guest vocalists, each being a commanding vocalist in her own right: Tish Weaver, Anni Liang, and Suzie Clark. They provide solid 3-part harmony bedrock for our version Christmas (Baby Please Come Home)!' +
+				'<br><br><span class="playerInfoLabel">Players:</span><table cellpadding="2" cellspacing="2">' +
+				'<tr><td>Tish Weaver</td><td width="10"></td><td>vocals</td></tr>' +
+				'<tr><td>Anni Liang</td><td width="10"></td><td>vocals</td></tr>' +
+				'<tr><td>Suzie Clark</td><td width="10"></td><td>vocals</td></tr>' +
+				'<tr><td>Bill Murphy</td><td width="10"></td><td>tenor saxophone</td></tr>' +
+				'<tr><td>Steve Mansour</td><td></td><td>drums, piano, synthesizers, guitars, bass, vocals' +
+				'</table>'),
+
+		];
+
+		function setAutoPlay(b) {
+			app.autoPlay = b;
+			var s = '<span style="color: #84c731"><i class="fas fa-toggle-o' + (b ? 'n' : 'ff') + '"></i></span>';
+			var autoPlay = document.getElementById('autoPlay');
+			autoPlay.innerHTML = s;
+		}
+
+		function toggleAutoPlay() {
+			setAutoPlay(!app.autoPlay);
+		}
+
+		function initJukebox() {
+			var audio = document.getElementById('jukebox');
+			audio.addEventListener('ended', function() {
+				app.ended = true;
+				if (app.autoPlay) {
+					nextSong();
+				}
+				app.ended = false;
+			});
+			audio.addEventListener('pause', function() {
+				app.playing = false;
+				setSongIndicator();
+			});
+			audio.addEventListener('play', function() {
+				app.playing = true;
+				setSongIndicator();
+			});
+			setAutoPlay(app.autoPlay);
+		}
+
+		//------------------------------------------------------------------
+		// ShowSongs - function to format the playlist into HTML.
+		//             The "nowPlaying" indicator cell has a unique id
+		//             that is the album name + song index.
+		//
+		// INPUTS
+		//
+		// RETURNS
+		//------------------------------------------------------------------
+		window.ShowSongs = function() {
+			var s = "";
+			document.write('<table align="center" border="0">');
+			for (i = 0; i < allSongs.length; i++) {
+				s = '<tr><td width="20"><span id="' + allSongs[i].Album + i + '"></span></td>'
+				s += '<td><a href="javascript:void(0);" onclick="playSong(' + i + ')"><span class="jukeList">' + allSongs[i].Title + '</span></a></td></tr>';
+				document.write(s);
+			}
+			document.write('</table>');
+			initJukebox();
+		}
+
+		function nowPlayingIndicator(i, s) {
+			var prev = allSongs[i].Album + i;
+			var cell = document.getElementById(prev);
+			if (cell != null) {
+				cell.innerHTML = s;
+			}
+		}
+
+		function getSongIndicatorHTML() {
+			var s = app.playing ? 'fa-volume-up' : 'fa-play';
+			var h = '<a href="javascript:void(0);" onclick="togglePlaySong()"><span style="color: #84c731"><i class="fas ' + s + '"></i></span></a>';
+			return h;
+		}
+
+		function setSongIndicator() {
+			var id = allSongs[app.idx].Album + app.idx;
+			var x = document.getElementById(id);
+			var h = getSongIndicatorHTML();
+			x.innerHTML = h;
+		}
+
+		function playCore(i) {
+			nowPlayingIndicator(app.idx, "")
+			var audio = document.getElementById('jukebox');
+			var source = document.getElementById('jukeboxSource');
+			var name = document.getElementById('nowPlaying');
+			var comment = document.getElementById('songComments');
+			var year = document.getElementById('songYear');
+			var albumCoverArt = document.getElementById('albumCoverArt');
+			var album = document.getElementById('album');
+			var track = document.getElementById('track');
+			app.idx = i;
+			name.innerHTML = allSongs[i].Title;
+			comment.innerHTML = allSongs[i].Comments;
+			year.innerHTML = '' + allSongs[i].Year;
+			album.innerHTML = allSongs[i].Album;
+			track.innerHTML = allSongs[i].Title;
+			albumCoverArt.src = '/music/albums/' + allSongs[i].Image;
+			source.src = allSongs[i].Path; // the url or path to the song file
+			var h = getSongIndicatorHTML();
+			nowPlayingIndicator(i, h);
+			return audio;
+		}
+
+		function setToSong(i) {
+			var audio = playCore(i);
+			audio.load();
+		}
+
+		//------------------------------------------------------------------
+		// playSong - set the source of the player to a song in the list
+		//            and play it
+		//
+		// INPUTS
+		//		i = index of song in allSongs[]
+		//
+		// RETURNS
+		//------------------------------------------------------------------
+		function playSong(i) {
+			var audio = playCore(i);
+			var playing = !audio.paused;
+			audio.load(); // load no matter what
+			if (playing || app.ended) { // play only if we were already playing
+				audio.play();
+			}
+		}
+
+		//------------------------------------------------------------------
+		// togglePlaySong - if the audio element is playing then pause it,
+		//                  if it's not playing then start it.
+		//------------------------------------------------------------------
+		function togglePlaySong(i) {
+			var audio = document.getElementById('jukebox');
+			if (app.playing) {
+				audio.pause();
+			} else {
+				audio.play();
+			}
+		}
+
+		function prevSong() {
+			var i = app.idx - 1;
+			if (i < 0) {
+				i = allSongs.length - 1;
+			}
+			playSong(i);
+		}
+
+		function nextSong() {
+			var i = app.idx + 1;
+			if (i >= allSongs.length) {
+				i = 0;
+			}
+			playSong(i);
+		}
+
+		function beginningOfSong() {
+			var audio = document.getElementById('jukebox');
+			audio.currentTime = 0;
+		}
+
+        // SetStalled - show or remove the stalled data indicator
+        // 
+        // INPUTS
+        //    x   0 = remove the indicator, 1 = show the indicator
+        //------------------------------------------------------------------
+        function SetStalled(x) {
+            var stalled = document.getElementById('jukeboxStalled');
+            switch (x) {
+                case 0: stalled.innerHTML = ''; break;
+                case 1: stalled.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; break;
+            }
+        }
+
+		function initJukebox() {
+			var audio = document.getElementById('jukebox');
+            //----------------------------------------------------------------------------
+            // playing
+            //      Playback is ready to start after having been paused or delayed due to
+            //      lack of data.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('playing', function() {
+                // console.log('playing');
+                SetStalled(0);
+            } );
+            
+            //----------------------------------------------------------------------------
+            // stalled
+            //      The user agent is trying to fetch media data, but data is unexpectedly
+            //      not forthcoming.
+            //----------------------------------------------------------------------------
+            audio.addEventListener('stalled', function() {
+                // console.log('stalled');
+                SetStalled(1);
+            } );
+
+            //----------------------------------------------------------------------------
+            // waiting
+            //      Playback has stopped because of a temporary lack of data
+            //----------------------------------------------------------------------------
+            audio.addEventListener('waiting', function() {
+                // console.log('waiting');
+                SetStalled(1);
+            } );
+        }
+
+
+	</script>
+
+    <div align="center" class="titletext" style="margin-top: 10;margin-bottom: 10;">Steve Mansour</div>
+	<table align="center">
+		<tr>
+			<td class="button4"><a href="/index.html">HOME</a></td>
+			<td width="25"></td>
+			<td class="button4"><a href="/music/index.html">MUSICIAN</a></td>
+			<td width="25"></td>
+			<td class="button4"><a href="/songwriter/index.html">SONG WRITER</a></td>
+			<td width="25"></td>
+			<td class="button4"><a href="/producer/index.html">PRODUCER</a></td>
+		</tr>
+	</table>
+
+	<!-- PUNK inset/topmenu.html -->
+	<table align="center">
+		<tr>
+			<td class="button4"><a href="/music/index.html">ALBUMS</a></td>
+			<td width="25"></td>
+			<td class="button4"><a href="/ChristmasSongs/index.html">CHRISTMAS SONGS</a></td>
+			<td width="25"></td>
+			<td class="button4"><a href="/music/video.html">VIDEOS</a></td>
+			<td width="25"></td>
+			<td class="button4"><a href="/music/collab/index.html">COLLABORATIONS</a></td>
+		</tr>
+	</table>
+	<!-- ENDPUNK -->
+
+	<br>
+	<table align="center">
+		<tr>
+			<td>New for 2019...<br>
+				<span class="vidTitle">Christmas Song #8</span><br>
+				<span class="vidSong">Christmas (Baby Please Come Home)</span><br>
+			</td>
+			<td width="20"></td>
+			<td><iframe height="300" width="400" src="https://www.youtube.com/embed/adrNUX53p1c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td>
+		</tr>
+	</table>
+	
+
+	<table align="Center" cellspacing="4" cellpadding="4" border="0">
+		<tr>
+			<td valign="top" >
+				<!-------------------------------------------------------
+				    MP3 Player
+				--------------------------------------------------------- -->
+				<table align="center" border="1" width="800"  bgcolor="#333333">
+					<tr>
+						<td align="right" valign="center" nowrap>
+							<button onclick="prevSong()" class="playerButton"><i class="fas fa-backward fa-lg"></i></button> &nbsp;&nbsp;
+							<button onclick="beginningOfSong()" class="playerButton"><i class="fas fa-fast-backward fa-lg"></i></button> &nbsp;&nbsp;
+						</td>
+						<td align="center" width="470">
+							<table cellpadding="2" align="center" border="0">
+								<tr>
+			                        <!-- 
+			                            SONG TITLE
+			                        -->
+			                        <td align="center">
+			                            <span id="nowPlaying" class="jukeTitle"></span>
+			                            <span id="jukeboxStalled" style="color:red;"></span>
+			                        </td>
+								</tr>
+								<tr>
+									<td align="center">
+										<audio class="my_audio" controls preload="none" id="jukebox" style="height: 20px;">
+											<source id="jukeboxSource" src="">
+											</source>
+											Your browser does not support the audio format.
+										</audio>
+									</td>
+								</tr>
+							</table>
+						</td>
+						<td align="left" valign="center">
+							<!-- <button onclick="nextSong()"><i class="fas fa-fast-forward fa-lg"></i></button> &nbsp;&nbsp; -->
+							&nbsp;&nbsp;<button onclick="nextSong()" class="playerButton"><i class="fas fa-forward fa-lg"></i></button> &nbsp;&nbsp;
+						</td>
+						<td align="center" nowrap>
+							<span style="color: #888888;font-size: 10pt;">AUTOPLAY NEXT<br></span>
+							<a href="javascript:void(0);" onclick="toggleAutoPlay();" style="color: #888888;font-size: 10pt;">
+								OFF <span id="autoPlay"></span> ON
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4" width="100%">
+							<table border="1" width="100%">
+								<tr>
+									<td align="center"><img id="albumCoverArt" src="../music/albums/ChristmasSongs.png" width="350"></td>
+									<td>
+										<script>
+											ShowSongs(); // called only once -- so it can be used for initializing
+										</script>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4" height="15" valign="top">
+							<table border="0">
+								<tr>
+									<td><span class="playerInfoLabel">ALBUM:</span></td>
+									<td><span id='album' class="playerAlbumTitle"></span></td>
+								</tr>
+								<tr>
+									<td><span class="playerInfoLabel">TRACK:</span></td>
+									<td><span id='track' class="playerSongTitle"></span></td>
+								</tr>
+								<tr>
+									<td><span class="playerInfoLabel">YEAR:</span></td>
+									<td><span id="songYear" class="playerSongYear"></span></td>
+								</tr>
+							</table>
+							<p>
+								<span id="songComments"></span>
+							</p>
+						</td>
+					</tr>
+				</table>
+			</td>
+			<td width="10"></td>
+
+			<td valign="top" bgcolor="black">
+				<!-------------------------------------------------------
+				    Other Videos
+				--------------------------------------------------------- -->
+				<table align="center" border="0">
+					<tr>
+						<td colspan="4" align="center"><span class="playerAlbumTitle">Christmas MUSIC Videos</span></td>
+					</tr>
+					<tr>
+						<td><iframe width="250" src="https://www.youtube.com/embed/SfTjYqiRbKY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+							<br><span class="videoSongTitle">I Saw Mommy Kissing Santa Claus</span>
+						</td>
+					</tr>
+					<tr><td height="20"></td></tr>
+					<tr>
+						<td><iframe width="250" src="https://www.youtube.com/embed/zRXL0IyiTdI" frameborder="0" allowfullscreen></iframe>
+							<br><span class="videoSongTitle">Have Yourself A Merry Little Christmas</span>
+						</td>
+					</tr>
+					<tr><td height="20"></td></tr>
+					<tr>
+						<td><iframe width="250" src="https://www.youtube.com/embed/8Fkti51BYME" frameborder="0" allowfullscreen></iframe>
+						    <br><span class="videoSongTitle">Merry Christmas</span>
+						</td>
+					</tr>
+				</table>
+
+			</td>
+		</tr>
+	</table>
+
+	<p>&nbsp;</p>
+	<script>
+		initJukebox();
+		setToSong(0);
+		setAutoPlay(app.autoPlay);
+	</script>
+</body>
+
+</html>
