@@ -4,14 +4,22 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Steve Mansour - Band Resources</title>
-    <link href="/sman.css" rel="stylesheet" type="text/css">
-    <link href="/buttons.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="/fa/css/all.css">
+    <link href="../sman.css" rel="stylesheet" type="text/css">
+    <link href="../buttons.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../fa/css/all.css">
 </head>
 
 <body>
 
     <script>
+
+        // AREA 1 contains the album cover, the song list, and dtails for each song
+        //
+        // AREA 2 contains the list of song collections.  There are currently
+        //        two types of collections: 0 = albums, 1 = isolated tracks
+        //        app.area2Type indicates which type of area should be displayed.
+        //
+        //
 		var app = {
             nextID: 1,        // next id new newly created song
 			idx: 0,           // index of current song
@@ -42,15 +50,21 @@
 
 		var allSongs = [
             //  typ year  album                  img                                      tempo   name                   path                                                           lyrics                part                       comments
-            //  --- ----  --------------------   ---------------------------------------    ---  --------------          -----------------------------------------------                -------------         ---------------------      ------------------ 
+            //  --- ----  --------------------   ---------------------------------------    ---  --------------          -----------------------------------------------                -------------         ---------------------      ------------------
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   155, 'Broken Glass',         '../music/mp3/Steve Mansour - Broken Glass.mp3',               'BrokenGlass',        'studio cut',              'from Unfinished Business'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   155, 'Broken Glass',         'isolated/BrokenGlass - Drums.mp3',                            'BrokenGlass',        'DRUMS',                   'Isolated drums with count'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   155, 'Broken Glass',         'isolated/BrokenGlass - Drums + Bass + RhythmGtr.mp3',         'BrokenGlass',        'DRUMS, BASS, Rhythm GTR', 'Basic rhythm elements of the song.'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   155, 'Broken Glass',         'isolated/BrokenGlass - Isolated keyboards.mp3',               'BrokenGlass',        'KEYBOARDS',               'The two opening keyboard patterns'),
+            Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   155, 'Broken Glass',         'isolated/BrokenGlass - Intro Synth 1.mp3',                    'BrokenGlass',        'KEYS INTRO SYNTH 1',      'Isolated intro synth part 1'),
+            Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   155, 'Broken Glass',         'isolated/BrokenGlass - Intro Synth 2.mp3',                    'BrokenGlass',        'KEYS INTRO SYNTH 2',      'Isolated intro synth part 2'),
+            Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   155, 'Broken Glass',         'isolated/BrokenGlass - Outro Synth 1.mp3',                    'BrokenGlass',        'KEYS OUTRO SYNTH 1',      'Isolated outro synth part 1'),
+            Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   155, 'Broken Glass',         'isolated/BrokenGlass - Outro Synth 2.mp3',                    'BrokenGlass',        'KEYS OUTRO SYNTH 2',      'Isolated outro synth part 2'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   155, 'Broken Glass',         'isolated/BrokenGlass - Isolated Lead Gtr End Of Verse 2.mp3', 'BrokenGlass',        'LEAD GTR, verse 2b',      'Lead guitar part for verse 2b'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   155, 'Broken Glass',         'isolated/BrokenGlass - LEAD GTR.mp3',                         'BrokenGlass',        'LEADS',                   'Leads through the whole song'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   155, 'Broken Glass',         'isolated/BrokenGlass - Isolated Lead Gtr in Chorus 2.mp3',    'BrokenGlass',        'LEAD GTR, chorus 2',      'Lead guitar part for second chorus'),
+            Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   155, 'Broken Glass',         'isolated/BrokenGlass - Chorus Counterpoint Guitar.mp3',       'BrokenGlass',        'CHORUS RHYTHM GTR 2',     'Counterpoint rhythm guitar part for chorus'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   155, 'Broken Glass',         'isolated/BrokenGlass - Isolated Solo Tracks.mp3',             'BrokenGlass',        'SOLO PARTS',              'Isolated solo parts'),
+            Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   155, 'Broken Glass',         'isolated/BrokenGlass - Solo Guitars.mp3',                     'BrokenGlass',        'SOLO PARTS 2 & 3',        'Isolated solo parts minus main solo guitar'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   155, 'Broken Glass',         'isolated/BrokenGlass - Vocals.mp3',                           'BrokenGlass',        'VOCALS',                  'All vocals isolated'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   155, 'Broken Glass',         'isolated/BrokenGlass - BG HIGH.mp3',                          'BrokenGlass',        'BG HIGH',                  'High harmony vocal.  Recording begins at Push 1'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   155, 'Broken Glass',         'isolated/BrokenGlass - BG MID.mp3',                           'BrokenGlass',        'BG MID',                  'Middle harmony vocal.  Recording begins at Push 1'),
@@ -61,14 +75,18 @@
             Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - Gtr Parts.mp3',               'CuteLittleLesbians', 'LEAD GTR',                'Lead guitar parts'),
             Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - SOLO 1.mp3',                  'CuteLittleLesbians', 'SOLO 1',                  'Guitar solo - Steve'),
             Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - SOLO 2.mp3',                  'CuteLittleLesbians', 'SOLO 2',                  'Guitar solo - Ari'),
+            Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/CLL - Solo Last Bar.mp3',                            'CuteLittleLesbians', 'SOLO LAST BAR',           'Guitar solo - last bar, minus Steve\'s part and Ari\'s part'),
             Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - isolated vocals.mp3',         'CuteLittleLesbians', 'VOCALS',                  'All vocal parts isolated'),
-            Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - High-Harmony-Vocal.mp3',      'CuteLittleLesbians', 'BG HIGH',        'High harmony vocals with a low amount of instrumentation and lead vocal for context.'),
+            Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - High-Harmony-Vocal.mp3',      'CuteLittleLesbians', 'BG HIGH',                 'High harmony vocals with a low amount of instrumentation and lead vocal for context.'),
             Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - Outro - Low Harmony.mp3',     'CuteLittleLesbians', 'OUTRO-LOW',               'Outro harmony - low'),
             Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - Outro - Mid Harmony.mp3',     'CuteLittleLesbians', 'OUTRO-MID',               'Outro harmony - middle'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   138, 'Down On A Number',     '../music/mp3/Steve Mansour - Down On A Number.mp3',           'DownOnANumber',      'studio cut',              'from Unfinished Business'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   138, 'Down On A Number',     'isolated/DOAN - Drums.mp3',                                   'DownOnANumber',      'DRUMS',                   'Isolated drums'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   138, 'Down On A Number',     'isolated/DOAN - Drums and BASS.mp3',                          'DownOnANumber',      'DRUMS & BASS',            'Bass with low volume drums and rhythm guitar'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   138, 'Down On A Number',     'isolated/DOAN - Drums and LEAD GTR and KEYS.mp3',             'DownOnANumber',      'LEAD GTR & KEYS',         'Lead and keyboard fills'),
+            Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   138, 'Down On A Number',     'isolated/DOAN - Verse sound effects.mp3',                     'DownOnANumber',      'VERSE SOUNDS',            'guitar and keyboard "sound effects" during the verses'),
+            Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   138, 'Down On A Number',     'isolated/DOAN - Chorus Keyboards.mp3',                        'DownOnANumber',      'CHORUS KEYS',             'Chorus Keyboards'),
+            Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   138, 'Down On A Number',     'isolated/DOAN - Push Keyboards.mp3',                          'DownOnANumber',      'PUSH KEYS',               'Push Keyboards'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   138, 'Down On A Number',     'isolated/DOAN - Solo Gtr 1.mp3',                              'DownOnANumber',      'LEAD SOLO 1',             'Steve - lead part'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   138, 'Down On A Number',     'isolated/DOAN - Solo Gtr 2.mp3',                              'DownOnANumber',      'LEAD SOLO 2',             'Ari - lead part'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   138, 'Down On A Number',     'isolated/DOAN - Drums and VOCALS.mp3',                        'DownOnANumber',      'VOCALS',                  'All vocals isolated'),
@@ -98,8 +116,9 @@
             Song(0, 2018, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png',  78, 'Sociopath',            'isolated/Sociopath-BASS and DRUMS.mp3',                       'sociopath',          'BASS and DRUMS',          'isolated bass and drums'),
             Song(0, 2018, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png',  78, 'Sociopath',            'isolated/Sociopath-isolated drums.mp3',                       'sociopath',          'DRUMS',                   'isolated drums with count. Here is a video of the signature drum pattern: <video controls width="300"><source src="isolated/Sociopath-drumpattern.mp4" type="video/mp4"> Sorry, your browser does not support HTML5 video</video> '),
             Song(0, 2018, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png',  78, 'Sociopath',            'isolated/Sociopath-isolated vocals.mp3',                      'sociopath',          'VOCALS',                  'isolated vocals'),
-            Song(0, 2018, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png',  78, 'Sociopath',            'isolated/Sociopath - BG HIGH.mp3',                            'sociopath',          'BG HIGH',                  'isolated high harmony vocal.  Starts just before chorus 1'),
+            Song(0, 2018, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png',  78, 'Sociopath',            'isolated/Sociopath - BG HIGH.mp3',                            'sociopath',          'BG HIGH',                 'isolated high harmony vocal.  Starts just before chorus 1'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   103, 'Wall Of Love',         '../music/mp3/Steve Mansour - Wall of Love.mp3',               'WallOfLove',         'studio cut',              'from Unfinished Business'),
+            Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   103, 'Wall Of Love',         'isolated/Wall Of Love - Isolated Strings.mp3',                'WallOfLove',         'KEYBOARD STRINGS',        'isolated strings'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',    90, 'Loved By You',         '../music/mp3/Steve Mansour - Loved By You.mp3',               'LovedByYou',         'studio cut',              'from Unfinished Business'),
 		];
 
@@ -136,9 +155,8 @@
 
         //------------------------------------------------------------------
         // GetArea2IndexString - returns the appropriate list name.
-        //             That is, it returns the current album title
-        //             if app.area2Type == 0, or it returns the song Title
-        //             if app.area2Type == 1.
+        //             if app.area2Type == 0 it returns the current album title
+        //             if app.area2Type == 1 it returns the song title
         //
         // INPUTS
         //
@@ -150,7 +168,7 @@
                 case 1: return allSongs[app.idx].Title;
             }
             return '';
-        }
+        };
 
 		//------------------------------------------------------------------
 		// ShowSongs - function to format the playlist into HTML.
@@ -166,7 +184,7 @@
 			var sl = '<table align="left" border="0">';
 			for (i = 0; i < allSongs.length; i++) {
                 if (app.area2Type == 0 && allSongs[i].Album == app.list) {
-    				s = '<tr><td width="20"><span id="' + allSongs[i].Album + i + '"></span></td>'
+    				s = '<tr><td width="20"><span id="' + allSongs[i].Album + i + '"></span></td>';
     				s += '<td><a href="javascript:void(0);" onclick="playSong(' + i + ')"><span class="jukeList">' + allSongs[i].Title;
                     if (allSongs[i].Part != '') {
                         s += ' - ' + allSongs[i].Part;
@@ -174,7 +192,7 @@
                     s += '</span></a></td></tr>';
     				sl += s;
                 } else if (app.area2Type == 1 && allSongs[i].Title == app.list) {
-                    s = '<tr><td width="20"><span id="' + allSongs[i].Title + allSongs[i].Part + '"></span></td>'
+                    s = '<tr><td width="20"><span id="' + allSongs[i].Title + allSongs[i].Part + '"></span></td>';
     				s += '<td><a href="javascript:void(0);" onclick="playSong(' + i + ')"><span class="jukeList">' + allSongs[i].Title;
                     if (allSongs[i].Part != '') {
                         s += ' - ' + allSongs[i].Part;
@@ -186,7 +204,7 @@
             sl += '</table>';
             var area1List = document.getElementById("area1List");
             area1List.innerHTML = sl;
-		}
+		};
 
         window.SetSongListIndicator = function(i) {
             //----------------------------------------------------------------
@@ -206,17 +224,18 @@
             if (x != null) {
                 cell.innerHTML = '<span style="color: #84c731"><i class="fas fa-angle-double-right fa-2x"></i></span>';
             }
-        }
+        };
 
         window.UpdateSongList = function(i) {
             var audio = document.getElementById('jukebox');
             if (!audio.paused) {
                 audio.pause();
+                app.playing = false;
             }
             SetSongListIndicator(i);
             ShowSongs();
             SetToSong(i);
-        }
+        };
 
         //------------------------------------------------------------------
 		// ShowLists - function to generate the collections list. Can
@@ -287,7 +306,7 @@
             var area2List = document.getElementById("area2List");
             area2List.innerHTML = sl;
 			initJukebox();
-		}
+		};
 
         function getSongIndicatorId(i) {
             var id = '';
@@ -327,7 +346,7 @@
 		}
 
 		function playCore(i) {
-			nowPlayingIndicator(app.idx, "")
+			nowPlayingIndicator(app.idx, "");
 			var audio = document.getElementById('jukebox');
 			var source = document.getElementById('jukeboxSource');
 			var name = document.getElementById('nowPlaying');
@@ -361,6 +380,18 @@
 			return audio;
 		}
 
+        //------------------------------------------------------------------
+		// SetToSong - function to indicate the current song. If the song
+		//             is playing the indicator is set to a little speaker
+		//             with sound waves coming out of it.  If the song is
+        //             not playing then is is set to a triangle pointing
+        //             to the right.
+		//
+		// INPUTS
+		//             i = index of the song
+		// RETURNS
+        //             nothing
+		//------------------------------------------------------------------
 		function SetToSong(i) {
 			var audio = playCore(i);
 			audio.load();
@@ -414,7 +445,7 @@
     				i = allSongs.length - 1;
     			}
                 found = songInList(i);
-            } while (!found)
+            } while (!found);
 			playSong(i);
 		}
 
@@ -448,49 +479,57 @@
     <script>
         Init();
     </script>
-
-    <p align="center" class="titletext">Steve Mansour</p>
     <table align="center">
         <tr>
-            <td class="button4"><a href="/index.html">HOME</a></td>
-            <td width="25"></td>
-            <td class="button4"><a href="/music/index.html">MUSICIAN</a></td>
-            <td width="25"></td>
-            <td class="button4"><a href="/songwriter/index.html">SONG WRITER</a></td>
-            <td width="25"></td>
-            <td class="button4"><a href="/producer/index.html">PRODUCER</a></td>
-        </tr>
-    </table>
+            <td>
 
-    <!-- PUNK inset/topmenu.html -->
-    <table align="center">
-        <tr>
-            <td class="button4"><a href="/music/index.html">ALBUMS</a></td>
-            <td width="25"></td>
-            <td class="button4"><a href="/ChristmasSongs/index.html">CHRISTMAS SONGS</a></td>
-            <td width="25"></td>
-            <td class="button4"><a href="/music/video.html">VIDEOS</a></td>
-            <td width="25"></td>
-            <td class="button4"><a href="/music/collab/index.html">COLLABORATIONS</a></td>
-        </tr>
-    </table>
-    <!-- ENDPUNK -->
-    <table width="850" align="center" border="0" cellspacing="4">
-        <tr>
-            <td colspan="3" height="15"></td>
-        </tr>
-        <tr><td colspan="3" height="5"></td></tr>
-        <tr>
-            <td colspan="3" valign="top"> This is a resource page for singers and players to help learn some of the original songs and arrangements.<br />
-                There are no links to this page within the site, so bookmark it if you find it useful.
-                <br/>
-                <br/>
-                <a href="https://docs.google.com/spreadsheets/d/1jN2ZoCM_7YnCOld_cQSrW_J2hEGw12X7ths6D1rk4rc/edit#gid=667095445"><i class="far fa-calendar-alt fa-2x"></i> Gray Rehearsal Calendar</a>
+                <p align="center" class="titletext">Steve Mansour</p>
+                <table align="center">
+                    <tr>
+                        <td class="button4"><a href="/index.html">HOME</a></td>
+                        <td width="25"></td>
+                        <td class="button4"><a href="/music/index.html">MUSICIAN</a></td>
+                        <td width="25"></td>
+                        <td class="button4"><a href="/songwriter/index.html">SONG WRITER</a></td>
+                        <td width="25"></td>
+                        <td class="button4"><a href="/producer/index.html">PRODUCER</a></td>
+                    </tr>
+                </table>
+
+                <!-- PUNK inset/topmenu.html -->
+                <table align="center">
+                    <tr>
+                        <td class="button4"><a href="/music/index.html">ALBUMS</a></td>
+                        <td width="25"></td>
+                        <td class="button4"><a href="/ChristmasSongs/index.html">CHRISTMAS SONGS</a></td>
+                        <td width="25"></td>
+                        <td class="button4"><a href="/music/video.html">VIDEOS</a></td>
+                        <td width="25"></td>
+                        <td class="button4"><a href="/music/collab/index.html">COLLABORATIONS</a></td>
+                    </tr>
+                </table>
+                <!-- ENDPUNK -->
+                <table width="850" align="center" border="0" cellspacing="4">
+                    <tr>
+                        <td colspan="3" height="15"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" height="5"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" valign="top"> This is a resource page for singers and players to help learn some of the original songs and arrangements.<br />
+                            There are no links to this page within the site, so bookmark it if you find it useful.
+                            <br />
+                            <br />
+                            <a href="https://docs.google.com/spreadsheets/d/1jN2ZoCM_7YnCOld_cQSrW_J2hEGw12X7ths6D1rk4rc/edit#gid=667095445"><i class="far fa-calendar-alt fa-2x"></i> Gray Rehearsal Calendar</a>
+                        </td>
+                    </tr>
+                </table>
             </td>
+            <td><a href="../images/GrayLogo-1000x1000.png" alt="Gray Logo"><img src="../images/GrayLogo-300x300.png" alt="Gray Logo"></td> </a>
         </tr>
     </table>
     <p>&nbsp;</p>
-
     <!-------------------------------------------------------
         MP3 Player
     --------------------------------------------------------- -->

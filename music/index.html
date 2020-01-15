@@ -90,17 +90,18 @@
         //----------------------------------------------------------
         function ShowCover(idx) {
             var albumCoverArt = document.getElementById('albumCoverArt');
+            var cell;
             albumCoverArt.src = '/music/albums/' + GetAlbumArt(allSongs[app.idx].Album, idx);
             document.getElementById('coverArtAnchor').href = albumCoverArt.src;
             switch (idx) {
                 case 0:
-                    var cell = document.getElementById('albumCoverArtBack');
+                    cell = document.getElementById('albumCoverArtBack');
                     cell.bgColor = "";
                     cell = document.getElementById('albumCoverArtFront');
                     cell.bgColor = "#000000";
                     break;
-                case 1:    
-                    var cell = document.getElementById('albumCoverArtFront');
+                case 1:
+                    cell = document.getElementById('albumCoverArtFront');
                     cell.bgColor = "";
                     cell = document.getElementById('albumCoverArtBack');
                     cell.bgColor = "#000000";
@@ -121,14 +122,14 @@
             Song(0, 2007, 'Unfinished Business',     'Money\'s Alright',                   'money',              'mp3/Steve Mansour - Money\'s Alright.mp3', '',''),
             Song(0, 2012, 'Unfinished Business',     'Talk To Her',                        'TalkToHer',          'mp3/Steve Mansour - Talk To Her.mp3', '',''),
             Song(0, 2013, 'Unfinished Business',     'Twenty Dollar Man',                  '20DollarMan',        'mp3/Steve Mansour - Twenty Dollar Man.mp3', '',''),
-            
+
             Song(0, 2012, 'Pursuit Of Pleasure',     'Living Life',                        'LivinLife',          'mp3/Steve Mansour - LivinLife.mp3', '',''),
             Song(0, 2012, 'Pursuit Of Pleasure',     'Cute Little Lesbians',               'CuteLittleLesbians', 'mp3/Steve Mansour - Cute Little Lesbians.mp3', '',''),
             Song(0, 2012, 'Pursuit Of Pleasure',     'Sociopath',                          'sociopath',          'mp3/Steve Mansour - Sociopath.mp3', '',''),
             Song(0, 2012, 'Pursuit Of Pleasure',     'I Will',                             'IWill',              'mp3/Steve Mansour - I Will.mp3', '',''),
             Song(0, 2012, 'Pursuit Of Pleasure',     'Cold Dark Road',                     'ColdDarkRoad',       'mp3/Steve Mansour - Cold Dark Road.mp3', '',''),
             Song(0, 2012, 'Pursuit Of Pleasure',     'Remember the Ride',                  'RememberTheRide',    'mp3/Steve Mansour - Remember the Ride.mp3', '',''),
-            
+
             Song(0, 2011, 'Covers',                  'Mr Blue Sky',                        '', 'mp3/Steve Mansour - Mr Blue Sky.mp3', '',''),
             Song(0, 2011, 'Covers',                  'No Reply',                           '', 'mp3/Steve Mansour - No Reply.mp3', '',''),
             Song(0, 2011, 'Covers',                  'Jenny 867-5309',                     '', 'mp3/Steve Mansour - Jenny.mp3', '',''),
@@ -142,7 +143,7 @@
             Song(0, 2011, 'Covers',                  'Call Me Back Again',                 '', 'mp3/Steve Mansour - Call Me Back Again.mp3', '',''),
             Song(0, 2011, 'Covers',                  'Til Summer Comes Around',            '', 'mp3/Steve Mansour - Til Summer Comes Around.mp3', '',''),
             Song(0, 2011, 'Covers',                  'Tie Your Mother Down',               '', 'mp3/Steve Mansour - Tie Your Mother Down.mp3', '',''),
-            
+
             Song(0, 2018, 'Cover Me',                'Love of the Common Man',             '', 'mp3/Steve Mansour - Love of the Common Man.mp3', '',''),
             Song(0, 2018, 'Cover Me',                'Superstition',                       '', 'mp3/Steve Mansour - Superstition.mp3', '',''),
             Song(0, 2018, 'Cover Me',                'Hanging On The Telephone',           '', 'mp3/Steve Mansour - Hanging On The Telephone.mp3', '',''),
@@ -155,7 +156,7 @@
             Song(0, 2018, 'Cover Me',                'You\'re No Good',                    '', 'mp3/Steve Mansour - You\'re No Good.mp3', '',''),
             Song(0, 2018, 'Cover Me',                'A Dream Goes On Forever',            '', 'mp3/Steve Mansour - A Dream Goes On Forever.mp3', '',''),
             Song(0, 2018, 'Cover Me',                'Alright',                            '', 'mp3/Steve Mansour - Alright.mp3', '',''),
-            
+
             Song(0, 2012, 'The Steves Volume 1',     'I\'ll Get You',                      '', 'mp3/Steve Mansour - I\'ll Get You.mp3', '',''),
             Song(0, 2012, 'The Steves Volume 1',     'Please Please Me',                   '', 'mp3/Steve Mansour - Please Please Me.mp3', '',''),
             Song(0, 2012, 'The Steves Volume 1',     'Eight Days A Week',                  '', 'mp3/Steve Mansour - Eight Days A Week.mp3', '',''),
@@ -167,7 +168,7 @@
             Song(0, 2012, 'The Steves Volume 1',     'Every Little Thing',                 '', 'mp3/Steve Mansour - Every Little Thing.mp3', '',''),
             Song(0, 2012, 'The Steves Volume 1',     'I Don\'t Want To Spoil The Party',   '', 'mp3/Steve Mansour - I Don\'t Want To Spoil The Party.mp3', '',''),
             Song(0, 2011, 'The Steves Volume 1',     'You Can\'t Do That',                 '', 'mp3/Steve Mansour - You Can\'t Do That.mp3', '',''),
-    
+
             Song(0, 2012, 'The Steves Volume 2',     'I\'ve Just Seen A Face',             '', 'mp3/Steve Mansour - I\'ve Just Seen A Face.mp3', '',''),
             Song(0, 2012, 'The Steves Volume 2',     'Fixing A Hole',                      '', 'mp3/Steve Mansour - Fixing A Hole.mp3', '',''),
             Song(0, 2012, 'The Steves Volume 2',     'Lady Madonna',                       '', 'mp3/Steve Mansour - Lady Madonna.mp3', '',''),
@@ -211,14 +212,14 @@
 
 		function initJukebox() {
 			var audio = document.getElementById('jukebox');
-           
+
             // audioprocess
             //      The input buffer of a ScriptProcessorNode is ready to be processed.
             //----------------------------------------------------------------------------
             audio.addEventListener('audioprocess', function() {
                 // console.log('audioprocess');
             } );
-            
+
             // canplay
             //      The browser can play the media, but estimates that not enough data
             //      has been loaded to play the media up to its end without having to
@@ -227,7 +228,7 @@
             audio.addEventListener('canplay', function() {
                 // console.log('canplay');
             } );
-            
+
             // canplaythrough
             //      The browser estimates it can play the media up to its end without
             //      stopping for content buffering.
@@ -235,21 +236,21 @@
             audio.addEventListener('canplaythrough', function() {
                 // console.log('canplaythrough');
             } );
-            
+
             // complete
             //      The rendering of an OfflineAudioContext is terminated.
             //----------------------------------------------------------------------------
             audio.addEventListener('complete', function() {
                 // console.log('complete');
             } );
-            
+
             // durationchange
             //      The duration attribute has been updated.
             //----------------------------------------------------------------------------
             audio.addEventListener('durationchange', function() {
                 // console.log('durationchange');
             } );
-            
+
             // emptied
             //      The media has become empty; for example, this event is sent if the
             //      media has already been loaded (or partially loaded), and the load()
@@ -258,7 +259,7 @@
             audio.addEventListener('emptied', function() {
                 // console.log('emptied');
             } );
-            
+
             // ended
             //      Playback has stopped because the end of the media was reached.
             //----------------------------------------------------------------------------
@@ -273,21 +274,21 @@
                 }
                 app.ended = false;
             } );
-            
+
             // loadeddata
             //      The first frame of the media has finished loading.
             //----------------------------------------------------------------------------
             audio.addEventListener('loadeddata', function() {
                 // console.log('loadeddata');
             } );
-            
+
             // loadedmetadata
             //      The metadata has been loaded.
             //----------------------------------------------------------------------------
             audio.addEventListener('loadedmetadata', function() {
                 // console.log('loadedmetadata');
             } );
-            
+
             // pause
             //      Playback has been paused.
             //----------------------------------------------------------------------------
@@ -296,7 +297,7 @@
                 app.playing = false;
                 setSongIndicator();
             } );
-            
+
             // play
             //      Playback has begun.
             //----------------------------------------------------------------------------
@@ -305,7 +306,7 @@
                 app.playing = true;
                 setSongIndicator();
             } );
-            
+
             // playing
             //      Playback is ready to start after having been paused or delayed due to
             //      lack of data.
@@ -314,28 +315,28 @@
                 // console.log('playing');
                 SetStalled(0);
             } );
-            
+
             // ratechange
             //      The playback rate has changed.
             //----------------------------------------------------------------------------
             audio.addEventListener('ratechange', function() {
                 // console.log('ratechange');
             } );
-            
+
             // seeked
             //      A seek operation completed.
             //----------------------------------------------------------------------------
             audio.addEventListener('seeked', function() {
                 // console.log('seeked');
             } );
-            
+
             // seeking
             //      A seek operation began.
             //----------------------------------------------------------------------------
             audio.addEventListener('seeking', function() {
                 // console.log('seeking');
             } );
-            
+
             // stalled
             //      The user agent is trying to fetch media data, but data is unexpectedly
             //      not forthcoming.
@@ -344,28 +345,28 @@
                 // console.log('stalled');
                 SetStalled(1);
             } );
-            
+
             // suspend
             //      Media data loading has been suspended.
             //----------------------------------------------------------------------------
             audio.addEventListener('suspend', function() {
                 // console.log('suspend');
             } );
-            
+
             // timeupdate
             //      The time indicated by the currentTime attribute has been updated.
             //----------------------------------------------------------------------------
             audio.addEventListener('timeupdate', function() {
                 // console.log('timeupdate');
             } );
-            
+
             // volumechange
             //      The volume has changed.
             //----------------------------------------------------------------------------
             audio.addEventListener('volumechange', function() {
                 // console.log('volumechange');
             } );
-            
+
             // waiting
             //      Playback has stopped because of a temporary lack of data
             //----------------------------------------------------------------------------
@@ -378,7 +379,7 @@
 		}
 
         // SetStalled - show or remove the stalled data indicator
-        // 
+        //
         // INPUTS
         //    x   0 = remove the indicator, 1 = show the indicator
         //------------------------------------------------------------------
@@ -406,7 +407,7 @@
                 case 1: return allSongs[app.idx].Title;
             }
             return '';
-        }
+        };
 
 		//------------------------------------------------------------------
 		// ShowSongs - function to format the playlist into HTML.
@@ -423,7 +424,7 @@
             var alength = allSongs.length;
 			for (i = 0; i < alength; i++) {
                 if (app.area2Type == 0 && allSongs[i].Album == app.list) {
-    				s = '<tr><td width="20"><span id="' + allSongs[i].Album + i + '"></span></td>'
+    				s = '<tr><td width="20"><span id="' + allSongs[i].Album + i + '"></span></td>';
     				s += '<td><a href="javascript:void(0);" onclick="playSong(' + i + ')"><span class="jukeList">' + allSongs[i].Title;
                     if (allSongs[i].Comments != '') {
                         s += '<span style="color: #84c731;"> <sup><i class="far fa-comment"></i></sup></span>';
@@ -431,7 +432,7 @@
                     s += '</span></a></td></tr>';
     				sl += s;
                 } else if (app.area2Type == 1 && allSongs[i].Title == app.list) {
-                    s = '<tr><td width="20"><span id="' + allSongs[i].Title + GetAlbumArt(allSongs[i].Album,0) + '"></span></td>'
+                    s = '<tr><td width="20"><span id="' + allSongs[i].Title + GetAlbumArt(allSongs[i].Album,0) + '"></span></td>';
     				s += '<td><a href="javascript:void(0);" onclick="playSong(' + i + ')"><span class="jukeList">' + allSongs[i].Title;
                     if (allSongs[i].Part != '') {
                         s += ' - ' + allSongs[i].Part;
@@ -443,13 +444,14 @@
             sl += '</table>';
             var area1List = document.getElementById("area1List");
             area1List.innerHTML = sl;
-		}
+		};
 
         window.SetSongListIndicator = function(i) {
+            var cell;
             switch (app.area2Type) {
                 case 0:
                     var x = GetArea2IndexString();
-                    var cell = document.getElementById(x);
+                    cell = document.getElementById(x);
                     cell.bgColor = "";
                     app.idx = i;
                     x = GetArea2IndexString();
@@ -457,13 +459,13 @@
                     cell = document.getElementById(x);
                     cell.bgColor = "#000000";
                 break;
-                case 1:    
+                case 1:
                     //----------------------------------------------------------------
                     // Update the Area2 indicator
                     // First, remove the indicator from the current album in area2...
                     // Then update the new album indicator
                     //----------------------------------------------------------------
-                    var cell = document.getElementById(x);
+                    cell = document.getElementById(x);
                     if (x != null) {
                         cell.innerHTML = '';
                     }
@@ -476,7 +478,7 @@
                     }
                     break;
             }
-        }
+        };
 
         window.UpdateSongList = function(i) {
             var audio = document.getElementById('jukebox');
@@ -489,7 +491,7 @@
             SetToSong(i);
             setSongIndicator(i);
             ShowCover(0);
-        }
+        };
 
         //------------------------------------------------------------------
 		// ShowLists - function to generate the collections list. Can
@@ -576,7 +578,7 @@
             var area2List = document.getElementById("area2List");
             area2List.innerHTML = sl;
 			initJukebox();
-		}
+		};
 
         function getSongIndicatorId(i) {
             var id = '';
@@ -616,7 +618,7 @@
 		}
 
 		function playCore(i) {
-			nowPlayingIndicator(app.idx, "")
+			nowPlayingIndicator(app.idx, "");
 			var audio = document.getElementById('jukebox');
 			var source = document.getElementById('jukeboxSource');
 			var name = document.getElementById('nowPlaying');
@@ -702,7 +704,7 @@
     				i = allSongs.length - 1;
     			}
                 found = songInList(i);
-            } while (!found)
+            } while (!found);
 			playSong(i);
 		}
 
@@ -783,7 +785,7 @@
                 -->
                 <table cellpadding="2" align="center" border="0" style="border-collapse: collapse;">
                     <tr>
-                        <!-- 
+                        <!--
                             SONG TITLE
                         -->
                         <td align="center">
@@ -803,7 +805,7 @@
                 </table>
             </td>
             <td align="left" valign="center">
-                <!-- 
+                <!--
                     NEXT
                 -->
                 &nbsp;&nbsp;<button onclick="nextSong()" class="playerButton"><i class="fas fa-forward"></i></button> &nbsp;&nbsp;
