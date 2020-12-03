@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<!-- <link href="https://fonts.googleapis.com/css2?family=Orbitron:900&family=Oleo+Script&family=Oswald&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet"> -->
+<link href="/buttons.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/fa/css/all.css">
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Orbitron:900');
+
+    body {
+        height: 100%;
+        background: #000000;
+        color: white;
+        font-family: "PT Sans", "Oswald", "Roboto", "Open Sans", sans-serif;
+    }
+
+    a:link {
+        color: white;
+        text-decoration: none;
+    }
+
+    a:visited {
+        color: white;
+        text-decoration: none;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    input[type=text] {
+        /* width: 100%; */
+        font-family: Oswald, sans-serif;
+        font-size: 14pt;
+        padding: 12px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+    }
+
+    .subbuttons {
+        padding: 12px;
+        background-color: #2CAF30;
+        /* border-radius: 20px; */
+        font-size: 15pt;
+        font-family: Oswald, san-serif;
+    }
+
+    .undertitle {
+        font-family: "Oswald", serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16pt;
+        color: #aaaaaa;
+    }
+
+    input[type=submit]:hover {
+        opacity: 0.8;
+    }
+
+    .titletext {
+        font-family: "Orbitron";
+        font-weight: 900;
+        font-size: 36px;
+    }
+</style>
+
+<body>
+    <div align="center" class="titletext" style="margin-top: 10;margin-bottom: 10;">Steve Mansour</div>
+    <table align="center">
+        <tr>
+            <td class="button4"><a href="/index.html">HOME</a></td>
+            <td width="25"></td>
+            <td class="button4"><a href="/music/index.html">MUSICIAN</a></td>
+            <td width="25"></td>
+            <td class="button4"><a href="/songwriter/index.html">SONG WRITER</a></td>
+            <td width="25"></td>
+            <td class="button4"><a href="/producer/index.html">PRODUCER</a></td>
+        </tr>
+    </table>
+
+    <!-- PUNK inset/topmenu.html -->
+    <table align="center">
+        <tr>
+            <td class="button4"><a href="/music/index.html">ALBUMS</a></td>
+            <td width="25"></td>
+            <td class="button4"><a href="/ChristmasSongs/index.html">CHRISTMAS SONGS</a></td>
+            <td width="25"></td>
+            <td class="button4"><a href="/music/video.html">VIDEOS</a></td>
+            <td width="25"></td>
+            <td class="button4"><a href="/music/collab/index.html">COLLABORATIONS</a></td>
+            <td width="25"></td>
+            <td class="button4"><a href="/music/bts/index.html">BEHIND THE SCENES</a></td>
+        </tr>
+    </table>
+    <!-- ENDPUNK -->
+
+    <FORM ACTION="/cgi-bin/subscribe.pl">
+        <div>
+            <div class="container">
+                <table align="center">
+                    <tr>
+                        <td class="undertitle" style="line-height: 1.4em" align="center">
+                            <p>This beagle is sad because...</p>
+                            <img align="center" src="images/sadbeagle.jpg" alt="">
+                            <p alig="center">... he wants you to subscribe</p>
+                            <p>
+                                Then you'll be notified when new videos are released.
+                                <br>
+                                And those emails include exclusive
+                                <span style="color: white; font-family: 'Oleo Script'; font-size:18pt;">
+                                    Behind The Scenes
+                                </span>
+                                content.
+                                <br>
+                                You'll also make the beagle visibly happy. Really. Try it.
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="15"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input id="subscribeName" type="text" size="30" placeholder="Enter your name" name="name" required>
+                            <input id="subscribeEmail" type="text" size="30" placeholder="Enter your email address" name="email" required>
+                            <input class="subbuttons" type="submit" value="Subscribe Me!">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+    </form>
+
+</body>
+
+</html>
