@@ -4,7 +4,8 @@
 <link href="/buttons.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="/fa/css/all.css">
 <style>
-    @import url('https://fonts.googleapis.com/css?family=Orbitron:900');
+    /* @import url('https://fonts.googleapis.com/css?family=Orbitron:900'); */
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Orbitron:wght@900&display=swap');
 
     body {
         height: 100%;
@@ -49,11 +50,18 @@
         background-color: #2CAF30;
         /* border-radius: 20px; */
         font-size: 15pt;
-        font-family: Oswald, san-serif;
+        font-family: "Noto Sans TC",sans-serif;
     }
 
-    .undertitle {
+    /* .undertitle {
         font-family: "Oswald", serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16pt;
+        color: #aaaaaa;
+    } */
+    .undertitle {
+        font-family: "Noto Sans TC",sans-serif;
         font-style: normal;
         font-weight: normal;
         font-size: 16pt;
@@ -96,7 +104,9 @@
             <td width="25"></td>
             <td class="button4"><a href="/music/collab/index.html">COLLABORATIONS</a></td>
             <td width="25"></td>
-            <td class="button4"><a href="/music/bts/index.html">BEHIND THE SCENES</a></td>
+            <td class="button4"><a href="/music/bts/index.html">BEHIND THE SCENES</a></td><td width="25"></td>
+            <td class="button4"><a href="/music/downloadSongs.html">DOWNLOAD</a></td>
+
         </tr>
     </table>
     <!-- ENDPUNK -->
@@ -106,32 +116,38 @@
             <div class="container">
                 <table align="center">
                     <tr>
-                        <td class="undertitle" style="line-height: 1.4em" align="center">
-                            <p>This beagle is sad because...</p>
-                            <img align="center" src="images/sadbeagle.jpg" alt="">
-                            <p alig="center">... he wants you to subscribe</p>
-                            <p>
-                                Then you'll be notified when new videos are released.
-                                <br>
-                                And those emails include exclusive
-                                <span style="color: white; font-family: 'Oleo Script'; font-size:18pt;">
-                                    Behind The Scenes
-                                </span>
-                                content.
-                                <br>
-                                You'll also make the beagle visibly happy. Really. Try it.
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td height="15"></td>
-                    </tr>
-                    <tr>
+                        <td></td>
                         <td>
                             <input id="subscribeName" type="text" size="30" placeholder="Enter your name" name="name" required>
                             <input id="subscribeEmail" type="text" size="30" placeholder="Enter your email address" name="email" required>
                             <input class="subbuttons" type="submit" value="Subscribe Me!">
                         </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" height="15"></td>
+                    </tr>
+                    <tr>
+                        <td><img src="../../images/GrayLogo-200x200.png"></td>
+                        <td class="undertitle" style="line-height: 1.4em" align="center">
+                            <p>This beagle is sad because...</p>
+                            <img align="center" src="images/sadbeagle.jpg" alt="">
+                            <p alig="center">... he wants you to subscribe to Steve's email list because</p>
+                            <p>
+                                you get emails for new releases and content,
+                                <br>
+                                emails include exclusive
+                                <span style="color: white;font-size:18pt;">
+                                    Behind The Scenes
+                                </span>
+                                content.
+                                <br>
+                                <br>
+                                But most important, you'll make the beagle happy. Really. Try it.<br>
+                                (even if you're already signed up, try it!)
+                            </p>
+                        </td>
+                        <td><img src="../../images/GrayLogo-200x200.png"></td>
                     </tr>
                 </table>
             </div>
