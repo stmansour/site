@@ -1,9 +1,7 @@
 @charset "UTF-8";
-/* CSS Document */
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:900,Thin');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
-@import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Bangers|Bowlby+One+SC');
 @import url('https://fonts.googleapis.com/css?family=PT+Sans|Oswald|Gruppo');
 @import url('https://fonts.googleapis.com/css?family=Orbitron:900');
 @import url('https://fonts.googleapis.com/css?family=Patua+One|Staatliches|Cairo|Archivo+Black|Acme');
@@ -18,7 +16,9 @@ body {
     bottom: 0;
     display: grid;
     grid-gap: 3px;
-    grid-template-areas: "h h h h h h h h h h h h" "c c c c c c c c c c c c" "f f f f f f f f f f f f";
+    grid-template-areas: "h h h h h h h h h h h h"
+                         "c c c c c c c c c c c c"
+                         "f f f f f f f f f f f f";
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 125px auto 50px;
     left: 0;
@@ -124,6 +124,11 @@ a:visited {
     float: right;
 }
 
+.origmusic {
+    font-family: 'Bangers';
+    font-size: 24pt;
+    color: red;
+}
 .xmasYear {
     font-size: 16pt;
     font-family: 'Patua One';

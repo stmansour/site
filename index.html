@@ -1,56 +1,68 @@
 <!doctype html>
 <html>
 
+<!-- Please refer to a document such as
+     https://www.smashingmagazine.com/understanding-css-grid-template-areas/
+     to review how the grid works
+-->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Steve Mansour - Home</title>
-    <link href="sman.css" rel="stylesheet" type="text/css">
+    <link href="home.css" rel="stylesheet" type="text/css">
     <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
 </head>
 
 <body>
-
-    <div class="container">
-        <div class="header">
-            <p><span class="firstName">Steve</span> <span class="lastName">Mansour</span></p>
-        </div>
-
-        <!-- <div class="menu">menu</div> -->
-
-        <div class="content">
-            <div class="roles">
-                <div class="role">
-                    <p class="roleTitle"><br>
-                        <a href="http://www.linkedin.com/in/SteveMansour" target="smanWork">
-                        SOFTWARE PROFESSIONAL<br>&nbsp;<br>
-                        <img src="images/Software.jpg" height="150">
-                        </a>
-                        <br>&nbsp;<br>
-                    </p>
-                </div>
-                <div class="role">
-                    <p class="roleTitle"><br>
-                        <a href="music/index.html">MUSICIAN<br>
-                        <br>
-                        <img src="images/TheSteves-small.png" alt=""></a><br><br>
-                    </p>
-                    <p></p>
-                </div>
-                <div class="role">
-                    <p class="roleTitle"><br><a href="songwriter/index.html">SONG WRITER<br>&nbsp;<br><img src="images/writers.png"></a><br>&nbsp;
-                    </p>
-                </div>
-                <div class="role">
-                    <p class="roleTitle"><br><a href="producer/index.html">PRODUCER<br>&nbsp;<br><img src="images/producer.png"></a><br>&nbsp;
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="footer"></div>
+    <div class="header">
+        <p><span class="firstName">Steve</span> <span class="lastName">Mansour</span></p>
     </div>
 
+    <table align="center" width="100%">
+        <tr>
+            <td colspan="4">
+                <p align="center">
+                    <br>
+                    <a href="/music">
+                        <span class="origmusic">ORIGINAL MUSIC</span>
+                        <br>
+                        <img src="images/GrayLogo-200x200.png" alt="Gray Music Factory Logo">
+                    </a>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p class="roleTitle"><br>
+                    <a href="music/index.html">MUSICIAN<br>
+                    <br>
+                    <img src="images/TheSteves-small.png" alt=""></a><br><br>
+                </p>
+            </td>
+            <td>
+                <p class="roleTitle"><br>
+                    <a href="songwriter/index.html">SONG WRITER<br>&nbsp;<br>
+                    <img src="images/writers.png"></a><br>&nbsp;
+                </p>
+            </td>
+            <td>
+                <p class="roleTitle"><br>
+                    <a href="producer/index.html">PRODUCER<br>&nbsp;<br>
+                    <img src="images/producer.png"></a><br>&nbsp;
+                </p>
+            </td>
+            <td>
+                <p class="roleTitle"><br>
+                    <a href="http://www.linkedin.com/in/SteveMansour" target="smanWork">
+                    SOFTWARE PROFESSIONAL<br>&nbsp;<br>
+                    <img src="images/Software.jpg" height="150">
+                    </a>
+                    <br>&nbsp;<br>
+                </p>
+            </td>
+        </tr>
+    </table>
 </body>
-
 </html>
