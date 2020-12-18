@@ -1,0 +1,63 @@
+@charset "UTF-8";
+/* CSS Document */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:900,Thin');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Bangers|Bowlby+One+SC|Tenor+Sans');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans|Oswald|Gruppo');
+@import url('https://fonts.googleapis.com/css?family=Orbitron:900');
+@import url('https://fonts.googleapis.com/css?family=Patua+One|Staatliches|Cairo|Archivo+Black|Acme');
+body {
+    height: 100%;
+    background: #000000;
+    color: white;
+    font-family: "PT Sans","Oswald","Roboto", "Open Sans", sans-serif;
+}
+
+.header {
+    background: #181818;
+    grid-area: h;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.origmusic, .origmusicunder {
+    font-family: 'Tenor Sans';
+    font-size: 18pt;
+}
+.origmusic {
+    color: #DDDDDD;
+}
+.origmusicunder {
+    color: red;
+    text-decoration: underline;
+}
+
+.roleTitle {
+    background: #404040;
+    text-align: center;
+    /* margin: 25px 25px 25px 25px; */
+}
+.firstName {
+    color: #ffffff;
+    font-family: 'Orbitron';
+    font-size: 64pt;
+    font-weight: 900;
+}
+
+.lastName {
+    color: #aaaaaa;
+    font-family: 'Orbitron';
+    font-size: 64pt;
+    font-weight: 900;
+}
+:link {
+    color: white;
+    text-decoration: none;
+}
+
+/* 	background-color: #666666; */
+
+a:visited {
+    color: white;
+    text-decoration: none;
+}
