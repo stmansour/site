@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:900,Thin');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Bangers|Bowlby+One+SC');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans|Oswald|Gruppo');
+@import url('https://fonts.googleapis.com/css?family=Orbitron:900');
+@import url('https://fonts.googleapis.com/css?family=Patua+One|Staatliches|Cairo|Archivo+Black|Acme');
+body {
+    height: 100%;
+    background: #000000;
+    color: white;
+    font-family: "PT Sans","Oswald","Roboto", "Open Sans", sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #F59231;
+  color: white;
+}
