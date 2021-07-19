@@ -1,10 +1,13 @@
 @charset "UTF-8";
 
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Roboto:900,Thin');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans|Bangers|Bowlby+One+SC');
-@import url('https://fonts.googleapis.com/css?family=PT+Sans|Oswald|Gruppo');
-@import url('https://fonts.googleapis.com/css?family=Orbitron:900');
-@import url('https://fonts.googleapis.com/css?family=Patua+One|Staatliches|Cairo|Archivo+Black|Acme');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans,Inconsolata:wght@300;700&display=swwap');
+/* @import url('https://fonts.googleapis.com/css?family=Open+Sans|Bangers|Bowlby+One+SC'); */
+/* @import url('https://fonts.googleapis.com/css?family=PT+Sans|Oswald|Gruppo'); */
+/* @import url('https://fonts.googleapis.com/css?family=Orbitron:900'); */
+/* @import url('https://fonts.googleapis.com/css?family=Patua+One|Staatliches|Cairo|Archivo+Black|Acme'); */
+
 body {
     height: 100%;
     background: #000000;
@@ -34,4 +37,24 @@ body {
 .topnav a.active {
   background-color: #F59231;
   color: white;
+}
+
+.infopage {
+    background-color: #eeeeee;
+    width: 800px;
+    margin: auto;
+    border: 8px solid #888888;
+    font-family: 'Inconsolata', monospace;
+    font-weight: normal;
+    color: black;
+    padding: 20px;
+}
+
+.infohdr {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.15em;
+}
+.infosubhdr {
+    font-family: 'Inconsolata', monospace;
+    font-weight: bold;
 }

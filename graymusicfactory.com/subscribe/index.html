@@ -40,7 +40,7 @@
     </script>
 
     <FORM ACTION="/cgi-bin/subscribe.pl">
-        <table align="center" width="500">
+        <table align="center" width="720">
             <tr>
                 <td colspan="2" height="2em"></td>
             </tr>
@@ -54,22 +54,12 @@
                 <td colspan="2" height="2em"></td>
             </tr>
             <tr>
-                <td>Name:</td>
                 <td>
-                    <input type="text" id="subscribeFirstName" required placeholder="first name" size="20" maxlength="35">
-                    <input type="text" id="subscribeLastName" required placeholder="last name" size="20" maxlength="50">
+                    <input type="text" name="name" id="subscribeName" required placeholder="enter your name" size="20" maxlength="35" required>
+                    <!-- <input type="text" id="subscribeLastName" required placeholder="last name" size="20" maxlength="50"> -->
+                    <input type="email" name="email" id="subscribeEmail" required placeholder="enter your email" size="35" maxlength="75" required>
+                    <input class="subbuttons" type="submit" value="Subscribe Me!">
                 </td>
-            </tr>
-            <tr>
-                <td>Email:</td>
-                <td><input type="email" id="subscribeEmail" required placeholder="email" size="35" maxlength="75"></td>
-            </tr>
-            <tr>
-                <td colspan="2" height="1em">&nbsp;</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input class="subbuttons" type="submit" value="Subscribe Me!"></td>
             </tr>
         </table>
     </form>
