@@ -5,7 +5,7 @@
 "use strict";
 
 var app = {
-    menus: ["Home","The Band","The Music","The Shop?","Sponsors"],
+    menus: ["Home","The Band","The Music","The Shop?","Corporate Sponsors"],
     links: ["/home","/band","/music","/merch","/sponsors"]
 };
 
