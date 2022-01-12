@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <link href="/gray.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <title>Gray Music Factory Official Website</title>
+    <script src="https://kit.fontawesome.com/c2cf8e1efa.js" crossorigin="anonymous"></script>
+    <script src="/gray.js"></script>
+    <script src="/gallery.js"></script>
+</head>
+
+<body>
+    <table align="center">
+        <tr>
+            <td width="100%">
+                <script>
+                    showMenu();
+                    highlightMenuItem("The Gallery");
+                </script>
+            </td>
+        </tr>
+    </table>
+
+    <table align="center">
+        <tr><td height="15px">&nbsp;</td></tr>
+        <tr>
+            <td align="center">
+                <a onClick="galleryPrev();" style="cursor: pointer; cursor: hand;">
+                    <i class="fa fa-chevron-left fa-2x" aria-hidden="true"></i>
+                </a>
+                &nbsp; &nbsp;
+                <span id="gallerySpinner"></span>
+                &nbsp; &nbsp;
+                <a onClick="galleryNext();" style="cursor: pointer; cursor: hand;">
+                    <i class="fa fa-chevron-right fa-2x" aria-hidden="true"></i>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <img src="gallery/img1b.jpg" id="galleryImage" alt="">
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

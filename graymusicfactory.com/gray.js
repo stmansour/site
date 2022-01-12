@@ -5,8 +5,8 @@
 "use strict";
 
 var app = {
-    menus: ["Home","The Band","The Music","The Shop?","Corporate Sponsors"],
-    links: ["/home","/band","/music","/merch","/sponsors"]
+    menus: ["Home","The Band","The Music","The Gallery","The Shop?","Sponsors"],
+    links: ["/home","/band","/music","/gallery","/merch","/sponsors"]
 };
 
 function buildMenuString() {
