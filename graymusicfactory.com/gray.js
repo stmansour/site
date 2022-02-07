@@ -10,12 +10,13 @@ var app = {
 };
 
 function buildMenuString() {
-    var s = '<div class="topnav">';
+    var s = '<div><span class="topnav">';
     for (var i = 0; i < app.menus.length; i++) {
         var m = app.menus[i];
         var n = app.links[i] + ".html";
         s += '<a id="topMenuAnchor' + m + '" href="' + n +'">' + m + '</a>';
     }
+    s += '</span>&nbsp;&nbsp;&nbsp;<img src="/images/GRAY-25.png" alt="">';
     return s + '</div>';
 }
 
