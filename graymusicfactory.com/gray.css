@@ -11,7 +11,7 @@
 /* @import url('https://fonts.googleapis.com/css?family=Patua+One|Staatliches|Cairo|Archivo+Black|Acme'); */
 body,p {
     background: #000000;
-    color: white;
+    color: #bbbbbb;
     font-family: "Roboto", "Roboto", sans-serif;
     height: 100%;
     font-size: 18pt;
@@ -19,6 +19,27 @@ body,p {
     font-weight: 500;
 }
 
+/* unvisited link */
+a:link {
+  color: #bbbbbb;
+  text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+  color: #bbbbbb;
+  text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+  color: white;
+}
+
+/* selected link */
+a:active {
+  color: white;
+}
 .gtitle {
     font-family: "Roboto";
     font-size: 24pt;
