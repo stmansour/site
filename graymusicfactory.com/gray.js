@@ -6,7 +6,7 @@
 
 var app = {
     menus: ["Home","The Band","The Music","The Gallery","The Shop?","Sponsors"],
-    links: ["/home","/band","/music","/gallery","/merch","/sponsors"]
+    links: ["home","band","music","gallery","merch","sponsors"]
 };
 
 function buildMenuString() {

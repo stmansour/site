@@ -12,16 +12,16 @@
 body,p {
     background: #000000;
     color: white;
-    font-family: "Montserrat", "PT Sans", "Oswald", "Roboto", "Open Sans", sans-serif;
+    font-family: "Roboto", "Roboto", sans-serif;
     height: 100%;
-    font-size: 32pt;
-    letter-spacing: 3px;
+    font-size: 18pt;
+    /* letter-spacing: 3px; */
     font-weight: 500;
 }
 
 .gtitle {
-    font-family: "Montserrat";
-    font-size: 36pt;
+    font-family: "Roboto";
+    font-size: 24pt;
     font-weight: 900;
 }
 
@@ -53,7 +53,7 @@ body,p {
     background-color: #eeeeee;
     border: 8px solid #888888;
     color: black;
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Roboto', sans-serif;
     font-weight: normal;
     margin: auto;
     padding: 20px;
@@ -61,11 +61,11 @@ body,p {
 }
 
 .infohdr {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.15em;
 }
 
 .infosubhdr {
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Helvetica', san-serif;
     font-weight: bold;
 }
