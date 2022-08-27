@@ -1,8 +1,4 @@
-/*global
-    document,
-*/
-
-"use strict";
+/* jshint esversion: 6 */
 
 var app = {
     menus: ["Home","The Band","The Music","The Gallery","The Shop?","Sponsors"],
@@ -16,7 +12,7 @@ function buildMenuString() {
         var n = app.links[i] + ".html";
         s += '<a id="topMenuAnchor' + m + '" href="' + n +'">' + m + '</a>';
     }
-    s += '</span>&nbsp;&nbsp;&nbsp;<img src="/images/GRAY-25.png" alt="">';
+    s += '</span>&nbsp;&nbsp;&nbsp;<img src="images/GRAY-25.png" alt="">';
     return s + '</div>';
 }
 
