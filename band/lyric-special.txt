@@ -1,0 +1,10 @@
+The lyrics in the band section have additional information that is not
+present in the main site.
+
+The tempo is listed
+
+Sections of the song are labeled (Verse, Push, Chorus, ...)
+
+Harmonies are shown in bolded typeface
+
+We can add notes on the right

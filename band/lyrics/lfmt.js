@@ -8,6 +8,10 @@ var app = {
 	band: true,			// set to false for public lyrics
 };
 
+//
+// a = category:  title, author, tempo, intro, verse, push, chorus, bridge, solo, outro
+// b = text: the string
+// c = comment: an optional comment associated with the line
 function f(a,b,c) {
 	if (typeof c === "undefined") {
 		c = "";

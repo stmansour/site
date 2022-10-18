@@ -78,10 +78,12 @@
             Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - SOLO 1.mp3',                  'CuteLittleLesbians', 'SOLO 1',                  'Guitar solo - Steve'),
             Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - SOLO 2.mp3',                  'CuteLittleLesbians', 'SOLO 2',                  'Guitar solo - Ari'),
             Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/CLL - Solo Last Bar.mp3',                            'CuteLittleLesbians', 'SOLO LAST BAR',           'Guitar solo - last bar, minus Steve\'s part and Ari\'s part'),
-            Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - isolated vocals.mp3',         'CuteLittleLesbians', 'VOCALS',                  'All vocal parts isolated'),
-            Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - High-Harmony-Vocal.mp3',      'CuteLittleLesbians', 'BG HIGH',                 'High harmony vocals with a low amount of instrumentation and lead vocal for context.'),
-            Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - Outro - Low Harmony.mp3',     'CuteLittleLesbians', 'OUTRO-LOW',               'Outro harmony - low'),
-            Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - Outro - Mid Harmony.mp3',     'CuteLittleLesbians', 'OUTRO-MID',               'Outro harmony - middle'),
+            // Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - isolated vocals.mp3',         'CuteLittleLesbians', 'VOCALS',                  'All vocal parts isolated'),
+            Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - GRAY - HI HARMONIES.mp3',      'CuteLittleLesbians', 'BG HIGH',                 'High harmony vocals + low vol music'),
+            Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - GRAY - MID HARMONIES.mp3',     'CuteLittleLesbians', 'BG MID',                  'Middle harmony vocals + low vol music'),
+            Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - GRAY - LOW HARMONIES.mp3',     'CuteLittleLesbians', 'BG LOW',                  'Low harmony vocals + low vol music'),
+            // Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - Outro - Low Harmony.mp3',     'CuteLittleLesbians', 'OUTRO-LOW',               'Outro harmony - low'),
+            // Song(0, 2015, 'Pursuit Of Pleasure', 'Pursuit of Pleasure - front 625x625.png', 157, 'Cute Little Lesbians', 'isolated/Cute Little Lesbians - Outro - Mid Harmony.mp3',     'CuteLittleLesbians', 'OUTRO-MID',               'Outro harmony - middle'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   138, 'Down On A Number',     '../music/mp3/Steve Mansour - Down On A Number.mp3',           'DownOnANumber',      'studio cut',              'from Unfinished Business'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   138, 'Down On A Number',     'isolated/DOAN - Drums.mp3',                                   'DownOnANumber',      'DRUMS',                   'Isolated drums'),
             Song(0, 2012, 'Unfinished Business', 'Unfinished Business-front-375x375.png',   138, 'Down On A Number',     'isolated/DOAN - Drums and BASS.mp3',                          'DownOnANumber',      'DRUMS & BASS',            'Bass with low volume drums and rhythm guitar'),
@@ -374,7 +376,7 @@
             var s='';
             s='';
             if (allSongs[i].Lyrics.length > 0) {
-                s = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/band/lyrics/'+ allSongs[i].Lyrics + '.html" target="_blank"><span class="playerLyrics">&nbsp;LYRICS&nbsp;</span></a>';
+                s = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="lyrics/'+ allSongs[i].Lyrics + '.html" target="_blank"><span class="playerLyrics">&nbsp;LYRICS&nbsp;</span></a>';
             }
 			track.innerHTML = allSongs[i].Title + s;
 
