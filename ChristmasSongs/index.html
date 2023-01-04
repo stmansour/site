@@ -115,6 +115,14 @@
 				'<tr><td>James Reily</td><td width="10"></td><td>harmonica</td></tr>' +
 				'<tr><td>Steve Mansour</td><td></td><td>bass, drums, guitars, piano, vocals</td></tr>' +
 				'</table>'),
+			Song(11, 2022, 'Christmas Songs', 'ChristmasSongs.png', 'Candy Cane Lane', '/music/mp3/Steve%20Mansour%20-%20Candy%20Cane%20Lane.mp3',
+				'Christmas song #11 is Sia\'s Candy Cane Lane. ' +
+				'Suzie LeClair (nee Suzie Clark) is back again this year to help with vocals. ' +
+				'<br><br><span class="playerInfoLabel">Players:</span><table cellpadding="2" cellspacing="2">' +
+				'<tr><td>Suzie LeClair</td><td width="10"></td><td>vocals</td></tr>' +
+				'<tr><td>Steve Mansour</td><td></td><td>bass, drums, guitars, piano, organ, synthesizers, vocals</td></tr>' +
+				'</table>'),
+
 		];
 
 		function setAutoPlay(b) {
@@ -177,16 +185,16 @@
 			}
 		}
 
-		function getSongIndicatorHTML() {
+		function getSongIndicatorHTML(i) {
 			var s = app.playing ? 'fa-volume-up' : 'fa-play';
-			var h = '<a href="javascript:void(0);" onclick="togglePlaySong()"><span style="color: #84c731"><i class="fas ' + s + '"></i></span></a>';
+			var h = '<a href="javascript:void(0);" onclick="togglePlaySong(' + i + ')"><span style="color: #84c731"><i class="fas ' + s + '"></i></span></a>';
 			return h;
 		}
 
 		function setSongIndicator() {
 			var id = allSongs[app.idx].Album + app.idx;
 			var x = document.getElementById(id);
-			var h = getSongIndicatorHTML();
+			var h = getSongIndicatorHTML(app.idx);
 			x.innerHTML = h;
 		}
 
@@ -373,13 +381,13 @@
 	<br>
 	<table align="center">
 		<tr>
-			<td>New for 2021...<br>
-				<span class="vidTitle">Christmas Song #10</span><br>
-				<span class="vidSong">Please Come Home For Christmas</span><br>
+			<td>New for 2022...<br>
+				<span class="vidTitle">Christmas Song #11</span><br>
+				<span class="vidSong">Candy Cane Lane</span><br>
 			</td>
 			<td width="20"></td>
 			<td>
-				<a href="https://youtu.be/pcwncesSwWo" target="_blank"><img src="songart/2021-thumbnail.jpg" width="480"></a>
+				<a href="https://youtu.be/fZmfet0jOlw" target="_blank"><img src="songart/2022-thumbnail.jpg" width="480"></a>
 			</td>
 		</tr>
 	</table>
@@ -410,8 +418,8 @@
 								</tr>
 								<tr>
 									<td align="center">
-										<audio controls style="height: 20px;">
-											<source id="jukeboxSource" src="http://stevemansour.com/music/bts/PCHFC-harmonies.mp3">
+										<audio id="jukebox" controls style="height: 20px;">
+											<source id="jukeboxSource" src="http://stevemansour.com/music/mp3/Steve Mansour - Rocking Around the Christmas Tree.mp3">
 											</source>
 											Your browser does not support the audio format.
 										</audio>
@@ -487,6 +495,12 @@
 				<table align="center" border="0">
 					<tr>
 						<td colspan="4" align="center"><span class="playerAlbumTitle">Christmas MUSIC Videos</span></td>
+					</tr>
+					<tr>
+						<td>
+							<a href="https://youtu.be/pcwncesSwWo" target="_blank"><img src="songart/2021-thumbnail.jpg" width="240"></a>
+							<br><span class="videoSongTitle">2021 - Please Come Home For Christmas</span>
+						</td>
 					</tr>
 					<tr>
 						<td><a href="https://youtu.be/umT2dhvIoe4" target="_blank"><img src="songart/2020-thumbnail.png" width="240"></a>
